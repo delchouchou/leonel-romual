@@ -5,7 +5,6 @@ import SiteNav from '@/components/SiteNav'
 import WeddingHero from '@/sections/WeddingHero'
 import InvitationSection from '@/sections/InvitationSection'
 import CountdownSection from '@/sections/CountdownSection'
-import ProgramSection from '@/sections/ProgramSection'
 import DressCodeSection from '@/sections/DressCodeSection'
 
 const Home: NextPage = () => {
@@ -15,7 +14,6 @@ const Home: NextPage = () => {
       <main>
         <WeddingHero />
         <InvitationSection />
-        <ProgramSection />
         <CountdownSection />
         <DressCodeSection />
       </main>
