@@ -1,288 +1,105 @@
-import React, { FC, useState, useRef, useEffect, MouseEvent, TouchEvent } from 'react'
+import React, { FC, useState } from 'react'
 import ScrollReveal from '@/components/ScrollReveal'
 import { useLocale } from '@/context/locale-context'
 import weddingConfig from '@/config/wedding.config'
+import { weddingSchedule } from '@/config/wedding-schedule'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
+const FloralCorner: FC<{ className: string }> = ({ className }) => (
+  <svg className={`wedding-ticket__floral ${className}`} viewBox="0 0 150 150" fill="none" aria-hidden="true">
+    <path d="M4 142C27 112 26 79 49 57C69 38 95 32 136 5M19 119C49 116 72 101 87 75M46 64C43 39 31 24 13 13M71 46C78 27 96 17 117 15" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M27 111C17 95 18 82 20 74C34 77 43 88 44 100M51 62C37 59 28 49 24 37C38 34 52 42 58 53M83 40C82 26 88 14 100 8C110 18 108 31 99 42M89 74C102 64 116 63 128 69C123 82 111 89 97 86" fill="currentColor" fillOpacity=".12" stroke="currentColor" strokeWidth="1.2" />
+    <g stroke="currentColor" strokeWidth="1"><circle cx="54" cy="53" r="11"/><circle cx="54" cy="53" r="6"/><circle cx="126" cy="18" r="10"/><circle cx="126" cy="18" r="5"/><circle cx="27" cy="122" r="10"/><circle cx="27" cy="122" r="5"/></g>
+    <g fill="currentColor" fillOpacity=".25"><circle cx="54" cy="39" r="5"/><circle cx="66" cy="49" r="5"/><circle cx="62" cy="64" r="5"/><circle cx="47" cy="67" r="5"/><circle cx="41" cy="51" r="5"/><circle cx="128" cy="6" r="4"/><circle cx="139" cy="17" r="4"/><circle cx="128" cy="30" r="4"/><circle cx="115" cy="19" r="4"/></g>
+  </svg>
+)
+
+const WeddingInvitationCard: FC = () => {
+  const { bride, groom } = weddingConfig.people
+  const [tilt, setTilt] = useState({ x: 0, y: 0 })
+  const thursdayEvents = weddingSchedule.filter((event) => event.day === 'Jeudi')
+  const fridayEvents = weddingSchedule.filter((event) => event.day === 'Vendredi')
+
+  const handlePointerMove = (event: React.MouseEvent<HTMLElement>): void => {
+    const bounds = event.currentTarget.getBoundingClientRect()
+    setTilt({
+      x: ((event.clientY - bounds.top) / bounds.height - 0.5) * -4,
+      y: ((event.clientX - bounds.left) / bounds.width - 0.5) * 4,
+    })
+  }
+
+  return (
+    <article
+      className="wedding-ticket"
+      onMouseMove={handlePointerMove}
+      onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+      style={{ transform: `perspective(1500px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
+    >
+      <div className="wedding-ticket__photo" style={{ backgroundImage: `url(${basePath}/images/leonelle-romuald.jpg)` }} />
+      <div className="wedding-ticket__frame" aria-hidden="true" />
+      <FloralCorner className="wedding-ticket__floral--tl" />
+      <FloralCorner className="wedding-ticket__floral--br" />
+
+      <div className="wedding-ticket__content">
+        <header className="wedding-ticket__header">
+          <p className="wedding-ticket__monogram">L<span>✦</span>R</p>
+          <p className="wedding-ticket__theme">Jardin de lilas</p>
+          <p className="wedding-ticket__families">Les familles EBOUELE <span>&amp;</span> DJOMO</p>
+          <p className="wedding-ticket__invite">ont la joie de vous inviter au mariage de leurs enfants</p>
+          <h3 className="wedding-ticket__names"><span>{bride.firstName}</span><i>&amp;</i><span>{groom.firstName}</span></h3>
+          <p className="wedding-ticket__welcome">et de célébrer avec eux le début d’une belle aventure</p>
+        </header>
+
+        <div className="wedding-ticket__datebar" aria-label="Les 17 et 18 décembre 2026">
+          <div className="wedding-ticket__date"><span>JEUDI</span><strong>17</strong><small>DÉCEMBRE</small></div>
+          <span className="wedding-ticket__date-divider" aria-hidden="true">✦</span>
+          <div className="wedding-ticket__date"><span>VENDREDI</span><strong>18</strong><small>DÉCEMBRE</small></div>
+          <b className="wedding-ticket__year">2026</b>
+        </div>
+
+        <div className="wedding-ticket__schedule">
+          <section className="wedding-ticket__day wedding-ticket__day--thursday">
+            <div className="wedding-ticket__day-heading"><span>01</span><div><small>JEUDI 17 DÉCEMBRE</small><h4>La dot</h4></div></div>
+            {thursdayEvents.map((event) => (
+              <div className="wedding-ticket__line wedding-ticket__line--single" key={event.title}>
+                <time>{event.time}</time><div><strong>{event.title}</strong><small>Nkongsamba</small></div>
+              </div>
+            ))}
+          </section>
+
+          <section className="wedding-ticket__day wedding-ticket__day--friday">
+            <div className="wedding-ticket__day-heading"><span>02</span><div><small>VENDREDI 18 DÉCEMBRE</small><h4>Le grand jour</h4></div></div>
+            {fridayEvents.map((event) => (
+              <div className="wedding-ticket__line" key={event.title}>
+                <time>{event.time}</time><div><strong>{event.title}</strong><small>{event.place}</small></div>
+              </div>
+            ))}
+          </section>
+        </div>
+
+        <footer className="wedding-ticket__footer"><span>NKONGSAMBA</span><i>✦</i><span>CAMEROUN</span></footer>
+      </div>
+    </article>
+  )
+}
+
 const InvitationSection: FC = () => {
   const { t } = useLocale()
-  const { bride, groom } = weddingConfig.people
-
-  // 3D Card Interactive State
-  const [rotateX, setRotateX] = useState(0)
-  const [rotateY, setRotateY] = useState(0)
-  const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 })
-  const [isFlipped, setIsFlipped] = useState(false)
-  const [isAutoFloating, setIsAutoFloating] = useState(true)
-  const [isZoomOpen, setIsZoomOpen] = useState(false)
-
-  const cardRef = useRef<HTMLDivElement>(null)
-
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>): void => {
-    if (!cardRef.current) return
-    setIsAutoFloating(false)
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    const centerX = rect.width / 2
-    const centerY = rect.height / 2
-
-    // Max tilt +-14deg
-    const rX = ((y - centerY) / centerY) * -12
-    const rY = ((x - centerX) / centerX) * 12
-
-    setRotateX(rX)
-    setRotateY(rY)
-
-    // Glare position
-    setGlare({
-      x: (x / rect.width) * 100,
-      y: (y / rect.height) * 100,
-      opacity: 0.35,
-    })
-  }
-
-  const handleMouseLeave = (): void => {
-    setRotateX(0)
-    setRotateY(0)
-    setGlare((prev) => ({ ...prev, opacity: 0 }))
-    setIsAutoFloating(true)
-  }
-
-  const handleTouchMove = (e: TouchEvent<HTMLDivElement>): void => {
-    if (!cardRef.current || e.touches.length === 0) return
-    setIsAutoFloating(false)
-    const touch = e.touches[0]
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = touch.clientX - rect.left
-    const y = touch.clientY - rect.top
-    const centerX = rect.width / 2
-    const centerY = rect.height / 2
-
-    const rX = ((y - centerY) / centerY) * -10
-    const rY = ((x - centerX) / centerX) * 10
-
-    setRotateX(rX)
-    setRotateY(rY)
-    setGlare({
-      x: (x / rect.width) * 100,
-      y: (y / rect.height) * 100,
-      opacity: 0.3,
-    })
-  }
-
-  const handleTouchEnd = (): void => {
-    setRotateX(0)
-    setRotateY(0)
-    setGlare((prev) => ({ ...prev, opacity: 0 }))
-    setIsAutoFloating(true)
-  }
-
-  const toggleFlip = (): void => {
-    setIsFlipped((prev) => !prev)
-  }
-
-  // Handle escape key to close zoom modal
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent): void => {
-      if (e.key === 'Escape') setIsZoomOpen(false)
-    }
-    if (isZoomOpen) {
-      document.body.style.overflow = 'hidden'
-      window.addEventListener('keydown', handleKeyDown)
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [isZoomOpen])
 
   return (
     <section id="invitation" className="section section--invitation" aria-labelledby="invitation-title">
       <div className="section__inner">
         <ScrollReveal>
-          <p className="section__eyebrow">{t('invitationEyebrow') || "02 / L'Invitation"}</p>
-          <h2 id="invitation-title" className="section__title">
-            {t('invitationTitle') || "Notre Carte d'Invitation"}
-          </h2>
-          <p className="section__lead">
-            {t('invitationLead') ||
-              "Découvrez notre faire-part officiel. Explorez la carte avec son animation 3D interactive et téléchargez-la pour la conserver précieusement."}
-          </p>
+          <p className="section__eyebrow">01 / {t('navInvitation')}</p>
+          <h2 id="invitation-title" className="section__title">{t('invitationTitle')}</h2>
+          <p className="section__lead">{t('invitationLead')}</p>
         </ScrollReveal>
-
-        {/* 3D Card Stage */}
-        <div className="invitation-stage">
-          <div
-            ref={cardRef}
-            className={`invitation-card-3d-wrap ${isAutoFloating ? 'invitation-card--floating' : ''}`}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            <div
-              className={`invitation-card-3d ${isFlipped ? 'invitation-card-3d--flipped' : ''}`}
-              style={{
-                transform: `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY + (isFlipped ? 180 : 0)}deg)`,
-              }}
-            >
-              {/* FRONT FACE (Poster) */}
-              <div className="invitation-card-face invitation-card-face--front">
-                <div
-                  className="invitation-card-glare"
-                  style={{
-                    background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,0.7) 0%, rgba(201,166,107,0.25) 35%, transparent 70%)`,
-                    opacity: glare.opacity,
-                  }}
-                />
-                <img
-                  src={`${basePath}/images/invitation_poster.png`}
-                  alt="Carte d'invitation officielle - Delchere & Ihechukwu"
-                  className="invitation-card__poster-img"
-                  loading="lazy"
-                />
-                <div className="invitation-card__gold-border" aria-hidden="true" />
-                <span className="invitation-card__corner-seal" title="D × I">
-                  ✦ D × I ✦
-                </span>
-              </div>
-
-              {/* BACK FACE (Official Ceremonial Letterpress) */}
-              <div className="invitation-card-face invitation-card-face--back">
-                <div className="invitation-card-back__inner">
-                  <div className="invitation-card-back__border">
-                    <span className="invitation-card-back__corner tl" />
-                    <span className="invitation-card-back__corner tr" />
-                    <span className="invitation-card-back__corner bl" />
-                    <span className="invitation-card-back__corner br" />
-
-                    <div className="invitation-card-back__monogram">D × I</div>
-                    <p className="invitation-card-back__script">{t('heroTitle') || 'Thèse de l’amour'}</p>
-                    <div className="invitation-card-back__line" />
-
-                    <p className="invitation-card-back__families">
-                      {t('cardTogetherFamilies') || 'De la part de leurs familles'}
-                    </p>
-
-                    <h3 className="invitation-card-back__names">
-                      {bride.firstName} <span className="amp">&</span> {groom.firstName}
-                    </h3>
-
-                    <p className="invitation-card-back__invitation">
-                      {t('cardRequestPleasure') || 'ont l’immense joie de vous convier à célébrer leur mariage.'}
-                    </p>
-
-                    <div className="invitation-card-back__details">
-                      <div className="invitation-card-back__detail-item">
-                        <span className="invitation-card-back__icon">✦</span>
-                        <strong>{t('heroDate') || 'Samedi 9 janvier 2027'}</strong>
-                      </div>
-                      <div className="invitation-card-back__detail-item">
-                        <span className="invitation-card-back__icon">⏱</span>
-                        <span>{weddingConfig.date.ceremonyTime} — Cérémonie religieuse</span>
-                      </div>
-                      <div className="invitation-card-back__detail-item">
-                        <span className="invitation-card-back__icon">📍</span>
-                        <span>{weddingConfig.calendar.location}</span>
-                      </div>
-                      <div className="invitation-card-back__detail-item">
-                        <span className="invitation-card-back__icon">🥂</span>
-                        <span>{weddingConfig.date.receptionTime} — Réception au Jubilee Hall</span>
-                      </div>
-                    </div>
-
-                    <p className="invitation-card-back__blessing">
-                      « Deux vies unies par l’amour, la foi et l’engagement éternel. »
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Action Controls */}
-        <div className="invitation-actions">
-          <a
-            href={`${basePath}/images/invitation_poster.png`}
-            download="Invitation-Mariage-Delchere-Ihechukwu.png"
-            className="btn btn--primary btn--download"
-            title="Télécharger la carte haute définition"
-          >
-            <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            <span>{t('downloadCard') || "Télécharger la carte"}</span>
-          </a>
-
-          <button
-            type="button"
-            className="btn btn--outline btn--flip"
-            onClick={toggleFlip}
-            aria-label="Retourner la carte d'invitation en 3D"
-          >
-            <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
-            </svg>
-            <span>
-              {isFlipped
-                ? (t('frontView') || 'Voir face avant')
-                : (t('flipCard3d') || 'Retourner la carte (3D)')}
-            </span>
-          </button>
-
-          <button
-            type="button"
-            className="btn btn--ghost btn--zoom"
-            onClick={() => setIsZoomOpen(true)}
-            aria-label="Agrandir en plein écran"
-          >
-            <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              <line x1="11" y1="8" x2="11" y2="14" />
-              <line x1="8" y1="11" x2="14" y2="11" />
-            </svg>
-            <span>{t('zoomCard') || 'Plein écran'}</span>
-          </button>
+        <div className="wedding-ticket-stage"><WeddingInvitationCard /></div>
+        <div className="wedding-ticket-actions">
+          <button type="button" onClick={() => window.print()} className="wedding-ticket__print">Télécharger le faire-part</button>
         </div>
       </div>
-
-      {/* Lightbox Modal */}
-      {isZoomOpen && (
-        <div className="invitation-modal" onClick={() => setIsZoomOpen(false)} role="dialog" aria-modal="true">
-          <div className="invitation-modal__content" onClick={(e) => e.stopPropagation()}>
-            <button
-              type="button"
-              className="invitation-modal__close"
-              onClick={() => setIsZoomOpen(false)}
-              aria-label="Fermer le plein écran"
-            >
-              ✕
-            </button>
-            <img
-              src={`${basePath}/images/invitation_poster.png`}
-              alt="Carte d'invitation officielle - Plein écran"
-              className="invitation-modal__img"
-            />
-            <div className="invitation-modal__footer">
-              <a
-                href={`${basePath}/images/invitation_poster.png`}
-                download="Invitation-Mariage-Delchere-Ihechukwu.png"
-                className="btn btn--primary"
-              >
-                {t('downloadCard') || "Télécharger l'affiche"}
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   )
 }

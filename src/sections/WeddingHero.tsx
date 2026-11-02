@@ -14,7 +14,13 @@ const WeddingHero: FC = () => {
       <div className="hero__media">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`${basePath}/images/banners/home-hero.png`}
+          src={`${basePath}/images/leonelle-romuald.jpg`}
+          alt=""
+          aria-hidden="true"
+          className="hero__background"
+        />
+        <img
+          src={`${basePath}/images/leonelle-romuald.jpg`}
           alt={t('heroImageAlt')}
           className="hero__image"
         />
@@ -30,11 +36,8 @@ const WeddingHero: FC = () => {
             {groom.firstName}
           </h1>
           <p className="hero__date">{t('heroDate')}</p>
-          <p className="hero__location">{t('ceremonyLocation')}</p>
+          <p className="hero__location">Nkongsamba, Cameroun</p>
           <div className="hero__cta-group">
-            <a href="#reserve" className="hero__cta btn btn--primary">
-              {t('reserveCta')}
-            </a>
             <a href="#invitation" className="hero__cta btn btn--outline">
               {t('viewInvitationCta')}
             </a>

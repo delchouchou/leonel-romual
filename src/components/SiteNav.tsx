@@ -1,15 +1,12 @@
 import React, { FC, useCallback, useState } from 'react'
-import LanguageToggle from '@/components/language-toggle'
 import { useLocale } from '@/context/locale-context'
 
 const NAV_ITEMS = [
   { id: 'home', labelKey: 'navHome' },
   { id: 'invitation', labelKey: 'navInvitation' },
-  { id: 'story', labelKey: 'navStory' },
   { id: 'countdown', labelKey: 'navCountdown' },
   { id: 'program', labelKey: 'navProgram' },
   { id: 'dress-code', labelKey: 'navDress' },
-  { id: 'reserve', labelKey: 'navReserve' },
 ] as const
 
 const SiteNav: FC = () => {
@@ -26,7 +23,7 @@ const SiteNav: FC = () => {
     <header className="site-nav">
       <div className="site-nav__inner">
         <a href="#home" className="site-nav__brand" onClick={handleNavClick}>
-          D × I
+          L & R
         </a>
 
         <button
@@ -52,7 +49,6 @@ const SiteNav: FC = () => {
               </li>
             ))}
           </ul>
-          <LanguageToggle />
         </nav>
       </div>
     </header>

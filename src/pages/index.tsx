@@ -4,11 +4,9 @@ import SiteFooter from '@/components/SiteFooter'
 import SiteNav from '@/components/SiteNav'
 import WeddingHero from '@/sections/WeddingHero'
 import InvitationSection from '@/sections/InvitationSection'
-import StorySection from '@/sections/StorySection'
 import CountdownSection from '@/sections/CountdownSection'
 import ProgramSection from '@/sections/ProgramSection'
 import DressCodeSection from '@/sections/DressCodeSection'
-import ReserveSection from '@/sections/ReserveSection'
 
 const Home: NextPage = () => {
   return (
@@ -17,11 +15,9 @@ const Home: NextPage = () => {
       <main>
         <WeddingHero />
         <InvitationSection />
-        <StorySection />
-        <CountdownSection />
         <ProgramSection />
+        <CountdownSection />
         <DressCodeSection />
-        <ReserveSection />
       </main>
       <SiteFooter />
     </div>

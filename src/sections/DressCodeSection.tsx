@@ -1,90 +1,54 @@
 import React, { FC } from 'react'
 import ScrollReveal from '@/components/ScrollReveal'
 import { useLocale } from '@/context/locale-context'
-import DressCodeMannequins from './dress-code/DressCodeMannequins'
 
-const HeartIcon: FC = () => (
-  <svg className="dress-code-heart" viewBox="0 0 24 22" aria-hidden="true">
-    <path
-      d="M12 21 C12 21 1 13.5 1 7 C1 3.5 4 1 7 1 C9.2 1 11 2.2 12 4 C13 2.2 14.8 1 17 1 C20 1 23 3.5 23 7 C23 13.5 12 21 12 21 Z"
-      fill="currentColor"
-    />
-  </svg>
-)
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-const SWATCHES = [
-  { className: 'dress-code-swatch--ivory', labelKey: 'dressColorIvory' },
-  { className: 'dress-code-swatch--gold', labelKey: 'dressColorGold' },
-  { className: 'dress-code-swatch--sage', labelKey: 'dressColorSage' },
-] as const
-
-const COLOR_PREFIX_REGEX = /^(\*{0,2}(?:Ivoire|Or Champagne|Vert Sauge|Ivory|Champagne Gold|Sage Green)\s*:\*{0,2})(.*)$/is
-
-const renderDressText = (text: string): React.ReactNode => {
-  const paragraphs = text.split('\n\n').filter((p) => p.trim().length > 0)
-
-  return paragraphs.map((para, idx) => {
-    const trimmed = para.trim()
-    const match = trimmed.match(COLOR_PREFIX_REGEX)
-    if (match) {
-      const label = match[1].replace(/\*\*/g, '')
-      return (
-        <p key={idx} className="dress-code-details__paragraph">
-          <strong className="dress-code-details__label">{label}</strong>
-          {match[2]}
-        </p>
-      )
-    }
-
-    return (
-      <p key={idx} className="dress-code-details__paragraph">
-        {trimmed}
-      </p>
-    )
-  })
-}
+const swatches = [
+  { name: 'Fuchsia', hex: '#C74783' },
+  { name: 'Rose poudré', hex: '#F0A7C5' },
+  { name: 'Lilas', hex: '#C3B2F2' },
+  { name: 'Violet', hex: '#7B51B2' },
+  { name: 'Prune', hex: '#4B0E76' },
+]
 
 const DressCodeSection: FC = () => {
   const { t } = useLocale()
 
   return (
     <section id="dress-code" className="dress-code-section" aria-labelledby="dress-code-title">
-      <div className="dress-code-section__inner">
+      <div className="dress-code-editorial">
         <ScrollReveal>
-          <p className="dress-code-section__eyebrow">04 / {t('dress')}</p>
+          <div className="dress-code-editorial__photo-wrap">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="dress-code-editorial__photo"
+              src={`${basePath}/images/dress-code-lilas-inspiration.png`}
+              alt="Inspiration de tenues de cérémonie en rose poudré et violet, assorties à un jardin fleuri."
+            />
+            <span className="dress-code-editorial__photo-label">Inspiration tenue</span>
+            <span className="dress-code-editorial__photo-mark" aria-hidden="true">L <i>✦</i> R</span>
+          </div>
+        </ScrollReveal>
 
-          <div className="dress-code-oval">
-            <div className="dress-code-oval__border" aria-hidden="true" />
+        <ScrollReveal delay={0.08}>
+          <div className="dress-code-editorial__content">
+            <p className="dress-code-section__eyebrow">03 / {t('navDress')}</p>
+            <p className="dress-code-editorial__overline">Notre univers chromatique</p>
+            <h2 id="dress-code-title" className="dress-code-theme">Jardin<br /><em>de lilas</em></h2>
+            <p className="dress-code-theme__copy">Une palette florale, romantique et lumineuse, inspirée des nuances qui habilleront notre célébration.</p>
 
-            <div className="dress-code-oval__content">
-              <h2 id="dress-code-title" className="dress-code-oval__code">
-                {t('dressCodeHeadline')}
-              </h2>
-              <HeartIcon />
-              <p className="dress-code-oval__subtitle">{t('dressCodeSubtitle')}</p>
-
-              <ul className="dress-code-swatches" aria-label={t('dressCodeSwatchesLabel')}>
-                {SWATCHES.map(({ className, labelKey }) => (
-                  <li key={labelKey}>
-                    <span className={`dress-code-swatch ${className}`} title={t(labelKey)}>
-                      <span className="dress-code-swatch__label">{t(labelKey)}</span>
-                    </span>
+            <div className="dress-code-palette">
+              <p className="dress-code-palette__title">Les couleurs du jour</p>
+              <ul className="wedding-palette" aria-label="Palette de couleurs du mariage">
+                {swatches.map(({ name, hex }) => (
+                  <li key={name}>
+                    <span className="wedding-palette__swatch" style={{ backgroundColor: hex }} />
+                    <span className="wedding-palette__label"><strong>{name}</strong><small>{hex}</small></span>
                   </li>
                 ))}
               </ul>
-
-              <DressCodeMannequins />
             </div>
-          </div>
-
-          <div className="dress-code-footer">
-            <p className="dress-code-footer__line">{t('dressCodeCtaLine')}</p>
-            <p className="dress-code-footer__script">{t('dressCodeCtaScript')}</p>
-            <HeartIcon />
-          </div>
-
-          <div className="dress-code-details">
-            <div className="dress-code-details__text">{renderDressText(t('dressText'))}</div>
           </div>
         </ScrollReveal>
       </div>

@@ -6,8 +6,8 @@ import { CssBaseline } from '@mui/material'
 import { MUIProvider } from '@/providers'
 import 'slick-carousel/slick/slick.css'
 import '@/styles/globals.css'
-import '@/styles/site.css'
 import '@/styles/dress-code.css'
+import '@/styles/site.css'
 //import { Splash } from '@/components/splash'
 import weddingConfig from '@/config/wedding.config'
 import { LocaleProvider } from '@/context/locale-context'
@@ -55,17 +55,17 @@ export function MyCustomApp({ Component, pageProps }: AppProps & CustomAppProps)
     <>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <meta name="theme-color" content="#f7f2e9" />
+        <meta name="theme-color" content="#fff8fc" />
         <meta
           name="description"
-          content={`D × I — We're happy to invite you to ${weddingConfig.people.bride.firstName} and ${weddingConfig.people.groom.firstName}'s wedding.`}
+          content={`Leonelle & Romuald — We invite you to ${weddingConfig.people.bride.firstName} and ${weddingConfig.people.groom.firstName}'s wedding.`}
         />
-        <meta property="og:title" content={`D × I — ${weddingConfig.date.date}`} />
+        <meta property="og:title" content={`Leonelle & Romuald — ${weddingConfig.date.date}`} />
         <meta
           property="og:description"
-          content={`D × I — ${weddingConfig.people.bride.firstName} & ${weddingConfig.people.groom.firstName} — ${weddingConfig.date.date}`}
+          content={`Leonelle & Romuald — ${weddingConfig.people.bride.firstName} & ${weddingConfig.people.groom.firstName} — ${weddingConfig.date.date}`}
         />
-        <title>{`D × I — ${weddingConfig.date.date}`}</title>
+        <title>{`Leonelle & Romuald — ${weddingConfig.date.date}`}</title>
       </Head>
       <MUIProvider>
         <CssBaseline />

@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&family=Dancing+Script:wght@400;500&display=swap");
 
 :root {
-  --inv-ivory: #f7f2e9;
+  --inv-ivory: #fff8fc;
   --inv-white: #ffffff;
-  --inv-champagne: #c49a52;
-  --inv-gold-deep: #8a5f28;
-  --inv-sage: #5f7568;
-  --inv-sage-deep: #3f5248;
-  --inv-ink: #1a2621;
+  --inv-champagne: #d65998;
+  --inv-gold-deep: #813c91;
+  --inv-sage: #9b6bd1;
+  --inv-sage-deep: #63377c;
+  --inv-ink: #321a39;
   --section-pad: clamp(56px, 10vw, 96px);
   --content-max: 720px;
   --nav-height: 64px;
@@ -2118,4 +2118,177 @@ a {
   white-space: nowrap;
   border: 0;
 }
-
+
+/* Hero: montrer la photo complète sans laisser les côtés vides. */
+.hero__media { background: #2d1836; }
+.hero__background {
+  position: absolute; inset: -12px; width: calc(100% + 24px); height: calc(100% + 24px);
+  object-fit: cover; object-position: center 48%; filter: blur(10px); opacity: .66; transform: scale(1.04);
+}
+.hero__image { object-fit: contain; object-position: center center; z-index: 1; }
+.hero__overlay { z-index: 2; background: linear-gradient(to top, rgba(43,18,57,.84), rgba(68,28,77,.42) 45%, rgba(64,29,66,.12)); }
+.site-nav { background: rgba(255,248,252,.94); border-bottom-color: rgba(199,71,131,.22); }
+.section { border-bottom-color: rgba(156,94,178,.2); }
+
+/* Billet d'invitation */
+.wedding-ticket-stage { perspective: 1500px; margin: 42px auto 0; }
+.wedding-ticket {
+  position: relative; isolation: isolate; width: min(100%,620px); min-height: 0; padding: 18px; overflow: hidden;
+  border: 1px solid #d6bfd8; border-radius: 5px; background: #fffdf9; color: #382945;
+  box-shadow: 0 34px 80px rgba(61,28,77,.16), 0 8px 20px rgba(61,28,77,.08);
+  transform-style: preserve-3d; transition: transform .24s ease, box-shadow .24s ease;
+}
+.wedding-ticket:hover { box-shadow: 0 40px 90px rgba(61,28,77,.21), 0 12px 28px rgba(61,28,77,.1); }
+.wedding-ticket__frame { position: absolute; z-index: 1; inset: 19px; border: 1px solid rgba(126,77,154,.55); pointer-events: none; }
+.wedding-ticket__frame::before { position: absolute; inset: 5px; border: 1px solid rgba(202,95,150,.42); content: ""; }
+.wedding-ticket__photo { position: absolute; z-index: -1; inset: 0; background-position: center; background-size: cover; opacity: .045; }
+.wedding-ticket__content { position: relative; z-index: 2; padding: 28px 38px 22px; text-align: center; }
+.wedding-ticket__header { position: relative; z-index: 3; max-width: 470px; margin: 0 auto; }
+.wedding-ticket__monogram { display: inline-flex; align-items: center; justify-content: center; gap: 7px; width: 58px; height: 38px; margin: 0 auto 5px; border: 1px solid #d5b6d5; border-radius: 50%; color: #653677; font: 18px "Cormorant Garamond", Georgia, serif; }
+.wedding-ticket__monogram span { color: #c74783; font-size: 12px; }
+.wedding-ticket__theme { margin: 9px 0 22px; color: #7b51a0; font: 500 10px "DM Mono", monospace; letter-spacing: .28em; text-transform: uppercase; }
+.wedding-ticket__families { margin: 0 0 5px; color: #53365f; font-size: 18px; letter-spacing: .025em; }
+.wedding-ticket__families span { color: #c74783; font-style: italic; }
+.wedding-ticket__invite { margin: 0 auto 8px; color: #65546a; font-size: 14px; font-style: italic; }
+.wedding-ticket__names { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0; color: #54286f; font-size: clamp(34px,5.8vw,48px); line-height: 1; white-space: nowrap; }
+.wedding-ticket__names i { color: #d05b98; font-size: .68em; font-weight: 400; }
+.wedding-ticket__welcome { margin: 8px 0 20px; color: #75657a; font-size: 14px; }
+.wedding-ticket__datebar { position: relative; display: grid; grid-template-columns: 1fr 28px 1fr; align-items: center; width: min(100%,380px); margin: 0 auto 22px; padding: 10px 12px 13px; border-block: 1px solid rgba(126,77,154,.44); background: rgba(246,237,248,.48); }
+.wedding-ticket__date { display: grid; justify-items: center; gap: 0; color: #68427f; font: 8px "DM Mono", monospace; letter-spacing: .16em; }
+.wedding-ticket__date strong { color: #b84489; font: 500 36px "Cormorant Garamond", Georgia, serif; }
+.wedding-ticket__date small { color: #765b7e; font: 7px "DM Mono", monospace; letter-spacing: .2em; }
+.wedding-ticket__date-divider { color: #c74783; font-size: 14px; text-align: center; }
+.wedding-ticket__year { position: absolute; left: 50%; bottom: -8px; padding: 0 8px; transform: translateX(-50%); background: #fffdf9; color: #75439a; font: 9px "DM Mono", monospace; letter-spacing: .2em; }
+.wedding-ticket__schedule { display: grid; grid-template-columns: minmax(150px,.72fr) minmax(0,1.45fr); border-block: 1px solid #dfd1e2; }
+.wedding-ticket__day { padding: 16px 15px 12px; text-align: left; }
+.wedding-ticket__day + .wedding-ticket__day { border-left: 1px solid #d8c6dd; }
+.wedding-ticket__day-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.wedding-ticket__day-heading > span { display: grid; width: 30px; height: 30px; flex: 0 0 30px; place-items: center; border-radius: 50%; background: #734494; color: white; font: 9px "DM Mono", monospace; }
+.wedding-ticket__day--thursday .wedding-ticket__day-heading > span { background: #cc659f; }
+.wedding-ticket__day-heading small { display: block; margin-bottom: 2px; color: #8a5b91; font: 7px "DM Mono", monospace; letter-spacing: .11em; }
+.wedding-ticket__day-heading h4 { margin: 0; color: #502a67; font: 600 20px/1 "Cormorant Garamond", Georgia, serif; }
+.wedding-ticket__line { display: grid; grid-template-columns: 42px minmax(0,1fr); gap: 8px; padding: 8px 0; border-top: 1px solid rgba(126,77,154,.14); }
+.wedding-ticket__line time { padding-top: 1px; color: #ad4388; font: 500 9px "DM Mono", monospace; white-space: nowrap; }
+.wedding-ticket__line div { display: grid; gap: 2px; }
+.wedding-ticket__line strong { color: #4e3458; font-size: 13px; font-weight: 600; line-height: 1.1; }
+.wedding-ticket__line small { color: #716374; font-size: 11px; line-height: 1.15; }
+.wedding-ticket__line--single { margin-top: 20px; padding: 12px 0; }
+.wedding-ticket__line--single time { font-size: 12px; }
+.wedding-ticket__line--single strong { font-size: 16px; }
+.wedding-ticket__footer { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 16px 0 0; color: #79568a; font-size: 8px; letter-spacing: .28em; }
+.wedding-ticket__footer i { color: #c74783; font-size: 10px; font-style: normal; }
+.wedding-ticket__floral { position: absolute; z-index: 2; width: 108px; color: #8b70a3; opacity: .42; pointer-events: none; }
+.wedding-ticket__floral--tl { top: 12px; left: 12px; }
+.wedding-ticket__floral--br { right: 12px; bottom: 12px; transform: rotate(180deg); }
+.wedding-ticket-actions { display: flex; justify-content: center; margin-top: 22px; }
+.wedding-ticket__print { padding: 12px 20px; border: 1px solid #895e9c; border-radius: 2px; background: transparent; color: #68427f; cursor: pointer; font: 10px "DM Mono", monospace; letter-spacing: .12em; text-transform: uppercase; transition: background .2s ease,color .2s ease; }
+.wedding-ticket__print:hover { background: #71448a; color: white; }
+
+/* Programme organisé par journée */
+.section--program { background: linear-gradient(145deg,#fbf6fc,#f5ecf9 56%,#fff8fc); }
+.wedding-program { display: grid; grid-template-columns: minmax(240px,.8fr) minmax(0,1.4fr); align-items: stretch; gap: 22px; margin-top: 38px; }
+.program-day { height: 100%; padding: 26px 28px 24px; border: 1px solid rgba(123,81,178,.2); border-radius: 4px; background: rgba(255,255,255,.72); box-shadow: 0 16px 42px rgba(81,38,99,.055); }
+.program-day__header { display: grid; grid-template-columns: 46px minmax(0,1fr) 30px; align-items: center; gap: 13px; padding-bottom: 18px; border-bottom: 1px solid #e6d9e9; }
+.program-day__number { display: grid; width: 43px; height: 43px; place-items: center; border: 1px solid #c28ab5; border-radius: 50%; color: #885194; font: 11px "DM Mono", monospace; }
+.program-day__header p { margin: 0 0 4px; color: #9a6598; font: 9px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
+.program-day__header h3 { margin: 0; color: #43264f; font: 600 clamp(22px,3vw,29px)/1.05 "Cormorant Garamond", Georgia, serif; }
+.program-day__flower { color: #c65d97; font-size: 25px; }
+.program-day__note { max-width: 22ch; margin: 20px auto 24px; color: #806b87; font-size: 16px; font-style: italic; line-height: 1.45; text-align: center; }
+.program-timeline { margin: 17px 0 0; padding: 0; list-style: none; }
+.program-timeline__item { display: grid; grid-template-columns: 54px 16px minmax(0,1fr); gap: 10px; min-height: 77px; }
+.program-timeline__time { padding-top: 1px; color: #a94386; font: 500 11px "DM Mono", monospace; white-space: nowrap; }
+.program-timeline__axis { position: relative; display: flex; justify-content: center; }
+.program-timeline__axis i { position: relative; z-index: 1; width: 9px; height: 9px; margin-top: 4px; border: 2px solid white; border-radius: 50%; background: #9b69b2; box-shadow: 0 0 0 1px #9b69b2; }
+.program-timeline__axis b { position: absolute; top: 13px; bottom: -1px; width: 1px; background: #d8c3df; }
+.program-timeline__content { padding-bottom: 14px; }
+.program-timeline__content h4 { margin: 0 0 3px; color: #43264f; font: 600 19px/1.05 "Cormorant Garamond", Georgia, serif; }
+.program-timeline__content p { margin: 0; color: #6f6072; font-size: 14px; line-height: 1.35; }
+.program-timeline__content a { display: inline-block; margin-top: 5px; color: #925087; font: 8px "DM Mono", monospace; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+.program-timeline__content a:hover { color: #5d1978; text-decoration: underline; }
+.program-day:first-child .program-timeline__item { min-height: 88px; }
+.program-day:first-child .program-timeline__content h4 { font-size: 23px; }
+
+/* Dress code : photographie d'inspiration et nuancier */
+.dress-code-section { padding: clamp(64px,9vw,100px) clamp(20px,5vw,48px); background: linear-gradient(135deg,#fff8fc,#f5ebfa 58%,#fcf6f9); }
+.dress-code-editorial { display: grid; grid-template-columns: minmax(0,.94fr) minmax(0,1fr); align-items: center; gap: clamp(36px,7vw,92px); width: min(100%,1100px); margin: 0 auto; }
+.dress-code-editorial__photo-wrap { position: relative; width: min(100%,450px); margin: 0 auto; padding: 12px; border: 1px solid #d4bfd9; background: rgba(255,255,255,.65); box-shadow: 0 25px 60px rgba(68,32,81,.14); }
+.dress-code-editorial__photo-wrap::before { position: absolute; z-index: 1; inset: 20px; border: 1px solid rgba(255,255,255,.65); content: ""; pointer-events: none; }
+.dress-code-editorial__photo { display: block; width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center 42%; }
+.dress-code-editorial__photo-label { position: absolute; z-index: 2; right: 23px; bottom: 23px; padding: 9px 12px; background: rgba(56,28,66,.78); color: white; font: 8px "DM Mono", monospace; letter-spacing: .13em; text-transform: uppercase; }
+.dress-code-editorial__photo-mark { position: absolute; z-index: 2; top: 28px; left: 28px; color: white; font: 19px "Cormorant Garamond", Georgia, serif; text-shadow: 0 2px 12px rgba(33,16,39,.5); }
+.dress-code-editorial__photo-mark i { color: #f4bfd7; font-size: 12px; font-style: normal; }
+.dress-code-editorial__content { max-width: 500px; padding: 8px 0; }
+.dress-code-section__eyebrow { margin: 0 0 30px; color: #a34f8e; font: 9px "DM Mono", monospace; letter-spacing: .18em; text-transform: uppercase; }
+.dress-code-editorial__overline { margin: 0 0 8px; color: #a05a91; font: 9px "DM Mono", monospace; letter-spacing: .14em; text-transform: uppercase; }
+.dress-code-theme { margin: 0; color: #4f2f66; font-size: clamp(47px,6vw,76px); font-weight: 500; line-height: .84; }
+.dress-code-theme em { color: #a74e92; font-weight: 400; }
+.dress-code-theme__copy { max-width: 38ch; margin: 22px 0 28px; color: #66546c; font-size: 18px; line-height: 1.45; }
+.dress-code-palette { padding-top: 18px; border-top: 1px solid #d8c4dd; }
+.dress-code-palette__title { margin: 0 0 15px; color: #6d477b; font: 9px "DM Mono", monospace; letter-spacing: .13em; text-transform: uppercase; }
+.wedding-palette { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 18px; margin: 0; padding: 0; list-style: none; }
+.wedding-palette li { display: flex; align-items: center; gap: 10px; min-width: 0; color: #493653; font-size: 13px; }
+.wedding-palette__swatch { display: block; width: 34px; height: 34px; flex: 0 0 34px; border: 2px solid white; border-radius: 50%; box-shadow: 0 2px 8px rgba(50,26,57,.15),0 0 0 1px rgba(108,70,126,.11); }
+.wedding-palette__label { display: grid; gap: 1px; }
+.wedding-palette__label strong { font-size: 13px; font-weight: 600; }
+.wedding-palette__label small { color: #897991; font: 8px "DM Mono", monospace; letter-spacing: .07em; }
+
+/* Décompte */
+.section--countdown { background: #fffafd; }
+.countdown__calendar { background: linear-gradient(145deg,#fff,#fbf4fc); border-color: rgba(139,97,160,.2); border-radius: 5px; box-shadow: 0 16px 42px rgba(69,32,84,.06); }
+.countdown__calendar-kicker,.countdown__weekday { color: #986e9f; }
+.countdown__calendar-title { color: #58366b; }
+.countdown__day { border-radius: 5px; }
+.countdown__day--wedding { background: #c74783; box-shadow: 0 8px 18px rgba(199,71,131,.24); }
+.countdown__heart { color: white; }
+.countdown__cell { border-color: rgba(139,97,160,.2); border-radius: 4px; background: #fcf6fc; }
+.countdown__value,.countdown__complete { color: #7947a8; }
+.countdown__label { color: #765d7e; }
+.countdown__button { border-color: rgba(139,97,160,.3); border-radius: 3px; color: #68427f; }
+.countdown__button:hover { border-color: #c74783; color: #8f3875; }
+
+@media (max-width:760px) {
+  .wedding-ticket { width: min(100%,560px); padding: 12px; }
+  .wedding-ticket__content { padding: 26px 24px 19px; }
+  .wedding-ticket__floral { width: 84px; opacity: .32; }
+  .wedding-ticket__schedule { grid-template-columns: minmax(120px,.7fr) minmax(0,1.3fr); }
+  .wedding-ticket__day { padding: 13px 10px 10px; }
+  .wedding-ticket__line { grid-template-columns: 37px minmax(0,1fr); gap: 5px; }
+  .wedding-ticket__line strong { font-size: 12px; }
+  .wedding-ticket__line small { font-size: 10px; }
+  .wedding-ticket__line time { font-size: 8px; }
+  .wedding-program { grid-template-columns: 1fr; gap: 16px; }
+  .program-day { padding: 23px 22px 18px; }
+  .dress-code-editorial { grid-template-columns: 1fr; gap: 32px; }
+  .dress-code-editorial__photo-wrap { width: min(100%,420px); }
+  .dress-code-editorial__content { max-width: 540px; margin: 0 auto; }
+  .dress-code-section__eyebrow { margin-bottom: 20px; }
+}
+@media (max-width:480px) {
+  .hero__names { white-space: normal; font-size: clamp(2rem,9vw,2.7rem); line-height: 1; }
+  .wedding-ticket__content { padding: 23px 13px 16px; }
+  .wedding-ticket__families { font-size: 16px; }
+  .wedding-ticket__invite { max-width: 29ch; font-size: 12px; }
+  .wedding-ticket__names { flex-wrap: wrap; white-space: normal; gap: 7px; font-size: clamp(26px,8vw,34px); }
+  .wedding-ticket__welcome { margin: 7px 0 15px; font-size: 12px; }
+  .wedding-ticket__datebar { margin-bottom: 16px; }
+  .wedding-ticket__date strong { font-size: 31px; }
+  .wedding-ticket__day-heading { align-items: flex-start; gap: 7px; }
+  .wedding-ticket__day-heading > span { width: 24px; height: 24px; flex-basis: 24px; font-size: 8px; }
+  .wedding-ticket__day-heading small { font-size: 6px; letter-spacing: .04em; }
+  .wedding-ticket__day-heading h4 { font-size: 17px; }
+  .wedding-ticket__line { grid-template-columns: 1fr; gap: 2px; }
+  .wedding-ticket__line--single { grid-template-columns: 42px minmax(0,1fr); gap: 8px; }
+  .wedding-ticket__footer { font-size: 7px; }
+  .program-day { padding: 21px 17px 16px; }
+  .program-timeline__item { grid-template-columns: 48px 14px minmax(0,1fr); gap: 7px; }
+  .dress-code-theme { font-size: 58px; }
+  .wedding-palette { gap: 11px 8px; }
+}
+@media print {
+  @page { size: A4 portrait; margin: 12mm; }
+  body * { visibility: hidden !important; }
+  .wedding-ticket,.wedding-ticket * { visibility: visible !important; }
+  .wedding-ticket-stage { position: absolute; inset: 0; display: block; margin: 0; }
+  .wedding-ticket { width: 100%; max-width: 170mm; min-height: 240mm; margin: 0 auto; transform: none !important; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .wedding-ticket-actions { display: none !important; }
+}
