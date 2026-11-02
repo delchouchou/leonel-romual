@@ -3,6 +3,9 @@
   "author": "Mattias Henders",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "homepage": "https://delchere.github.io/wedding-invitation",
   "scripts": {
     "dev": "next dev",
