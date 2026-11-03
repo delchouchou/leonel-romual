@@ -15,7 +15,6 @@ const StorySection: FC = () => (
       <div className="history-section__image" aria-hidden="true">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={`${basePath}/images/alliances-histoire.png`} alt="" />
-        <span>Unis par l’amour</span>
       </div>
     </div>
   </section>

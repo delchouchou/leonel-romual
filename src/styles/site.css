@@ -2295,16 +2295,16 @@ a {
 
 /* Histoire, localisation, cadeaux et contacts */
 .history-section { position: relative; overflow: hidden; padding: clamp(72px,10vw,128px) clamp(20px,5vw,48px); background: #f8f0fa; }
-.history-section__inner { position: relative; display: grid; grid-template-columns: minmax(0,1.05fr) minmax(280px,.85fr); align-items: center; gap: clamp(34px,7vw,88px); width: min(100%,1120px); margin: 0 auto; }
-.history-section__copy { position: relative; z-index: 1; padding: clamp(24px,4vw,48px); background: rgba(255,251,253,.92); border: 1px solid rgba(137,80,160,.22); box-shadow: 0 22px 70px rgba(74,36,90,.1); }
+.history-section::before { position: absolute; z-index: 1; inset: 0; content: ""; background: linear-gradient(90deg,#f8f0fa 0%,rgba(248,240,250,.96) 34%,rgba(248,240,250,.68) 64%,rgba(248,240,250,.25) 100%); pointer-events: none; }
+.history-section__inner { position: relative; z-index: 2; width: min(100%,1120px); margin: 0 auto; }
+.history-section__copy { position: relative; z-index: 1; max-width: 790px; padding: clamp(24px,4vw,48px); background: rgba(255,251,253,.9); border: 1px solid rgba(137,80,160,.22); box-shadow: 0 22px 70px rgba(74,36,90,.1); }
 .history-section__eyebrow,.locations-section__eyebrow,.gift-registry-section__eyebrow,.contacts-section__eyebrow { margin: 0 0 16px; color: #a44886; font: 9px "DM Mono",monospace; letter-spacing: .18em; text-transform: uppercase; }
 .history-section h2,.locations-section h2,.gift-registry-section h2,.contacts-section h2 { margin: 0 0 20px; color: #4d2b64; font: 500 clamp(36px,5vw,58px)/.98 "Cormorant Garamond",Georgia,serif; }
 .history-section h2 em { color: #a24886; font-weight: 400; }
 .history-section__copy > p:not(.history-section__eyebrow) { color: #55455d; font-size: clamp(16px,1.7vw,19px); line-height: 1.65; }
-.history-section__image { position: relative; min-height: 520px; overflow: hidden; border: 10px solid rgba(255,255,255,.72); box-shadow: 0 24px 64px rgba(65,30,82,.2); }
-.history-section__image::after { position: absolute; inset: 45% 0 0; content: ""; background: linear-gradient(transparent,rgba(52,28,64,.5)); }
+.history-section__image { position: absolute; z-index: 0; top: 0; right: -2vw; width: min(68%,780px); height: 100%; overflow: hidden; opacity: .72; }
+.history-section__image::after { position: absolute; inset: 0; content: ""; background: linear-gradient(90deg,#f8f0fa 0%,rgba(248,240,250,.12) 42%,rgba(248,240,250,0) 100%); }
 .history-section__image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.history-section__image span { position: absolute; z-index: 1; right: 22px; bottom: 20px; color: white; font: italic 28px "Dancing Script",cursive; }
 .locations-section,.contacts-section { padding: clamp(70px,9vw,108px) clamp(20px,5vw,48px); background: #fffafd; }
 .locations-section__inner,.gift-registry-section__inner,.contacts-section__inner { width: min(100%,1100px); margin: 0 auto; }
 .locations-section__intro,.gift-registry-section__intro,.contacts-section__intro { max-width: 62ch; margin: 0 0 32px; color: #6d5d73; font-size: 17px; }
@@ -2316,6 +2316,7 @@ a {
 .location-card a,.gift-transfer-note a { display: inline-block; margin-top: 14px; color: #92447e; font: 9px "DM Mono",monospace; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
 .location-card a:hover,.gift-transfer-note a:hover { text-decoration: underline; }
 .locations-section__note,.gift-registry-section__note,.contacts-section__note { margin: 20px 0 0; color: #827487; font-size: 13px; }
+.gift-registry-section__note--intro { max-width: 75ch; margin: -14px 0 24px; color: #806c85; font-size: 14px; }
 .gift-registry-section { padding: clamp(70px,9vw,108px) clamp(20px,5vw,48px); background: linear-gradient(140deg,#f8effa,#fff8fb 60%,#f2eafa); }
 .gift-list-toggle { display: inline-flex; align-items: center; gap: 18px; padding: 15px 22px; border: 1px solid #98619d; background: #75458e; color: white; font: 10px "DM Mono",monospace; letter-spacing: .09em; text-transform: uppercase; cursor: pointer; }
 .gift-list-toggle span { font-size: 15px; }
@@ -2372,14 +2373,16 @@ a {
 .demo-ticket-card__guest { margin: 0 0 20px; color: #5e4a67; }
 .demo-ticket-card__code { padding-top: 15px; border-top: 1px solid #eaddec; color: #915489; font: 10px "DM Mono",monospace; }
 .demo-ticket-card > button { margin: 10px 0 0; padding: 13px 18px; border: 0; background: #75458e; color: white; font: 9px "DM Mono",monospace; text-transform: uppercase; cursor: pointer; }
+.demo-ticket-card .demo-qr { width: 184px; height: 184px; margin: 18px auto; padding: 8px; }
+.demo-ticket-card__download { display: block; margin: 12px auto !important; }
 .demo-ticket-card__used { padding: 12px; background: #fcecef; color: #8d3155; }
 .demo-ticket-card__warning { margin: 18px 0; color: #817488; font-size: 12px; line-height: 1.5; }
 .demo-ticket-card__back { margin: 22px 0 0; }
 
 @media (max-width:760px) {
-  .history-section__inner { grid-template-columns: 1fr; }
+  .history-section__image { right: 0; width: 100%; opacity: .27; }
+  .history-section::before { background: rgba(248,240,250,.62); }
   .history-section__copy { padding: 26px 22px; }
-  .history-section__image { min-height: 340px; }
   .locations-grid,.gift-options,.contacts-grid { grid-template-columns: 1fr; }
   .gift-registry-content .gift-options { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .gift-option { min-height: 0; }
@@ -2388,4 +2391,10 @@ a {
 @media (max-width:480px) {
   .gift-registry-content .gift-options { grid-template-columns: 1fr; }
   .demo-guest-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  body * { visibility: hidden !important; }
+  .demo-ticket-card,.demo-ticket-card * { visibility: visible !important; }
+  .demo-ticket-card { position: absolute; top: 0; left: 0; width: 100%; max-width: none; min-height: 0; margin: 0; border: 0; box-shadow: none; }
+  .demo-ticket-card__download,.demo-ticket-card > button { display: none !important; }
 }

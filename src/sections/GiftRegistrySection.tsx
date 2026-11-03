@@ -48,7 +48,8 @@ const GiftRegistrySection: FC = () => {
       <div className="gift-registry-section__inner">
         <p className="gift-registry-section__eyebrow">Une attention pour notre nouvelle vie</p>
         <h2 id="gift-registry-title">Votre présence est notre plus beau cadeau</h2>
-        <p className="gift-registry-section__intro">La liste est masquée pour vous laisser découvrir les idées seulement si vous souhaitez offrir un cadeau. Choisissez le montant qui vous convient ; le cadeau sélectionné représente votre contribution au projet des mariés.</p>
+        <p className="gift-registry-section__intro">Pour celles et ceux qui souhaitent nous témoigner une attention particulière, nous avons préparé une liste de cadeaux sous forme de contributions financières. Choisissez, selon vos moyens, l’idée et le montant qui vous conviennent. Votre geste nous aidera à concrétiser nos projets tout en nous évitant d’avoir à transporter et à stocker de nombreux cadeaux le jour du mariage. Merci de tout cœur pour votre générosité.</p>
+        <p className="gift-registry-section__note gift-registry-section__note--intro">La liste est masquée pour vous laisser découvrir les idées seulement si vous souhaitez offrir un cadeau. Choisissez le montant qui vous convient ; le cadeau sélectionné représente votre contribution au projet des mariés.</p>
         <button
           type="button"
           className="gift-list-toggle"
