@@ -1,30 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { isTicketStoreConfigured, ticketStoreRequest, WeddingTicket } from '@/utils/ticket-store'
+import { guests } from '@/config/guest-list'
 
-type ResponseBody = { success: boolean; message?: string; ticket?: Pick<WeddingTicket, 'guest_name' | 'party_size' | 'token' | 'checked_in_at'> }
+type ResponseBody = { success: boolean; message?: string; ticket?: { guest_name: string; party_size: number; token: string } }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseBody>): Promise<void> {
+export default function handler(req: NextApiRequest, res: NextApiResponse<ResponseBody>): void {
   if (req.method !== 'GET') {
     res.setHeader('Allow', ['GET'])
     res.status(405).json({ success: false, message: 'Méthode non autorisée.' })
     return
   }
+
   const token = typeof req.query.token === 'string' ? req.query.token : ''
-  if (!token || token.length > 100 || !isTicketStoreConfigured()) {
-    res.status(token ? 503 : 404).json({ success: false, message: 'Ce billet est introuvable.' })
+  const guest = guests.find((entry) => entry.code === token)
+  if (!guest) {
+    res.status(404).json({ success: false, message: 'Ce billet est introuvable.' })
     return
   }
-  try {
-    const tickets = await ticketStoreRequest<Pick<WeddingTicket, 'guest_name' | 'party_size' | 'token' | 'checked_in_at'>[]>(
-      `wedding_tickets?select=guest_name,party_size,token,checked_in_at&token=eq.${encodeURIComponent(token)}`
-    )
-    if (!tickets.length) {
-      res.status(404).json({ success: false, message: 'Ce billet est introuvable.' })
-      return
-    }
-    res.status(200).json({ success: true, ticket: tickets[0] })
-  } catch (error) {
-    console.error('Wedding ticket read failed', error)
-    res.status(503).json({ success: false, message: 'Le billet ne peut pas être chargé pour le moment.' })
-  }
+
+  res.status(200).json({ success: true, ticket: { guest_name: guest.name, party_size: guest.places, token: guest.code } })
 }

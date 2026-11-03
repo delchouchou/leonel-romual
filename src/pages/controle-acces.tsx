@@ -4,11 +4,10 @@ import { useRouter } from 'next/router'
 
 type CheckInResult = {
   success: boolean
-  status?: 'checked-in' | 'already-used' | 'invalid'
+  status?: 'valid' | 'invalid'
   message: string
   guestName?: string
   partySize?: number
-  checkedInAt?: string
 }
 type BarcodeResult = { rawValue: string }
 type BarcodeDetectorLike = { detect: (source: HTMLVideoElement) => Promise<BarcodeResult[]> }
@@ -25,9 +24,6 @@ const tokenFromScan = (value: string): string => {
 
 const CheckInPage: FC = () => {
   const router = useRouter()
-  const [pin, setPin] = useState('')
-  const [staffName, setStaffName] = useState('Accueil')
-  const [authorized, setAuthorized] = useState(false)
   const [tokenInput, setTokenInput] = useState('')
   const [result, setResult] = useState<CheckInResult | null>(null)
   const [message, setMessage] = useState('')
@@ -37,11 +33,8 @@ const CheckInPage: FC = () => {
   const streamRef = useRef<MediaStream | null>(null)
   const animationRef = useRef<number | null>(null)
   const detectorRef = useRef<BarcodeDetectorLike | null>(null)
+  const handledUrlCode = useRef('')
   const codeFromUrl = typeof router.query.code === 'string' ? router.query.code : ''
-
-  useEffect(() => {
-    if (router.isReady && codeFromUrl) setTokenInput(codeFromUrl)
-  }, [router.isReady, codeFromUrl])
 
   const stopCamera = (): void => {
     if (animationRef.current !== null) window.cancelAnimationFrame(animationRef.current)
@@ -56,7 +49,7 @@ const CheckInPage: FC = () => {
     if (animationRef.current !== null) window.cancelAnimationFrame(animationRef.current)
   }, [])
 
-  const checkIn = async (rawCode: string, accessPin = pin): Promise<void> => {
+  const checkIn = async (rawCode: string): Promise<void> => {
     const token = tokenFromScan(rawCode)
     if (!token) return
     setBusy(true)
@@ -65,13 +58,13 @@ const CheckInPage: FC = () => {
     try {
       const response = await fetch('/api/tickets/check-in', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'x-checkin-pin': accessPin },
-        body: JSON.stringify({ token, staffName }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token }),
       })
       const data = await response.json() as CheckInResult
       setResult(data)
       setTokenInput(token)
-      if (!response.ok && response.status !== 409) setMessage(data.message)
+      if (!response.ok) setMessage(data.message)
     } catch {
       setMessage('Connexion impossible. Vérifiez Internet avant de laisser entrer la personne.')
     } finally {
@@ -80,22 +73,12 @@ const CheckInPage: FC = () => {
     }
   }
 
-  const authorize = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-    event.preventDefault()
-    setBusy(true)
-    setMessage('')
-    try {
-      const response = await fetch('/api/tickets', { headers: { 'x-checkin-pin': pin } })
-      const data = await response.json()
-      if (!response.ok) throw new Error(data.message || 'Code d’accès incorrect.')
-      setAuthorized(true)
-      if (codeFromUrl) await checkIn(codeFromUrl, pin)
-    } catch (error) {
-      setMessage(error instanceof Error ? error.message : 'Accès refusé.')
-    } finally {
-      setBusy(false)
-    }
-  }
+  useEffect(() => {
+    if (!router.isReady || !codeFromUrl || handledUrlCode.current === codeFromUrl) return
+    handledUrlCode.current = codeFromUrl
+    setTokenInput(codeFromUrl)
+    void checkIn(codeFromUrl)
+  }, [router.isReady, codeFromUrl])
 
   const submitCode = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
@@ -106,7 +89,7 @@ const CheckInPage: FC = () => {
     setMessage('')
     const Detector = (window as WindowWithBarcodeDetector).BarcodeDetector
     if (!Detector) {
-      setMessage('Le scan intégré n’est pas pris en charge par ce navigateur. Utilisez l’appareil photo du téléphone pour ouvrir le billet, puis le lien « Équipe d’accueil : vérifier ce billet », ou saisissez son code ici.')
+      setMessage('Le scan intégré n’est pas pris en charge par ce navigateur. Utilisez l’appareil photo du téléphone pour ouvrir le billet, puis le lien « Équipe d’accueil : vérifier ce billet », ou saisissez le code ici.')
       return
     }
     try {
@@ -143,43 +126,26 @@ const CheckInPage: FC = () => {
       <div className="demo-tickets-page__inner checkin-page">
         <Link href="/"><a className="demo-tickets-page__back">← Retour au site</a></Link>
         <p className="demo-tickets-page__badge">Espace réservé à l’accueil</p>
-        <h1>Contrôle des entrées</h1>
-        <p className="demo-tickets-page__intro">Scannez le QR présenté par l’invité. Le système affiche son nom, le nombre de places et refuse les billets déjà utilisés.</p>
-
-        {!authorized ? (
-          <form className="gift-pledge-form ticket-admin-login" onSubmit={authorize}>
-            <label>Code privé de l’équipe d’accueil
-              <input type="password" autoComplete="current-password" required value={pin} onChange={(event) => setPin(event.target.value)} />
+        <h1>Scanner un billet</h1>
+        <p className="demo-tickets-page__intro">Scannez le QR : le nom de l’invité s’affiche. Vérifiez-le puis cochez cette personne sur votre feuille d’entrée commune.</p>
+        <div className="checkin-tools">
+          <button type="button" onClick={cameraOpen ? stopCamera : startCamera}>{cameraOpen ? 'Arrêter le scan' : 'Scanner avec la caméra'}</button>
+          {cameraOpen && <video ref={videoRef} className="checkin-camera" playsInline muted />}
+          <form className="checkin-manual-form" onSubmit={submitCode}>
+            <label>Ou collez le code / lien du billet
+              <input value={tokenInput} onChange={(event) => setTokenInput(event.target.value)} placeholder="Code du QR ou lien du billet" required />
             </label>
-            <button type="submit" disabled={busy}>{busy ? 'Vérification…' : 'Ouvrir le contrôle'}</button>
-            {message && <p className="gift-pledge-form__feedback" role="alert">{message}</p>}
+            <button type="submit" disabled={busy}>{busy ? 'Recherche…' : 'Afficher le nom'}</button>
           </form>
-        ) : (
-          <>
-            <div className="checkin-tools">
-              <label>Nom de l’agent d’accueil
-                <input value={staffName} maxLength={80} onChange={(event) => setStaffName(event.target.value)} />
-              </label>
-              <button type="button" onClick={cameraOpen ? stopCamera : startCamera}>{cameraOpen ? 'Arrêter le scan' : 'Scanner avec la caméra'}</button>
-              {cameraOpen && <video ref={videoRef} className="checkin-camera" playsInline muted />}
-              <form className="checkin-manual-form" onSubmit={submitCode}>
-                <label>Ou collez le code / lien du billet
-                  <input value={tokenInput} onChange={(event) => setTokenInput(event.target.value)} placeholder="Code du QR ou lien du billet" required />
-                </label>
-                <button type="submit" disabled={busy}>{busy ? 'Vérification…' : 'Vérifier le billet'}</button>
-              </form>
-            </div>
-            {message && <p className="gift-pledge-form__feedback" role="alert">{message}</p>}
-            {result && (
-              <section className={`checkin-result checkin-result--${result.status || 'invalid'}`} aria-live="polite">
-                <p className="checkin-result__status">{result.message}</p>
-                {result.guestName && <h2>{result.guestName}</h2>}
-                {result.partySize && <p>{result.partySize} place{result.partySize > 1 ? 's' : ''} associée{result.partySize > 1 ? 's' : ''} à ce billet.</p>}
-                {result.checkedInAt && <p>Heure du scan : {new Date(result.checkedInAt).toLocaleString('fr-FR')}</p>}
-              </section>
-            )}
-            <Link href="/gestion-billets"><a className="demo-ticket-card__staff-link">Gérer la liste des invités et des billets</a></Link>
-          </>
+        </div>
+        {message && <p className="gift-pledge-form__feedback" role="alert">{message}</p>}
+        {result && (
+          <section className={`checkin-result checkin-result--${result.status || 'invalid'}`} aria-live="polite">
+            <p className="checkin-result__status">{result.message}</p>
+            {result.guestName && <h2>{result.guestName}</h2>}
+            {result.partySize && <p>{result.partySize} place{result.partySize > 1 ? 's' : ''} associée{result.partySize > 1 ? 's' : ''} à ce billet.</p>}
+            {result.status === 'valid' && <p>Vérifiez si son nom est déjà coché, puis cochez-le sur la feuille.</p>}
+          </section>
         )}
       </div>
     </main>

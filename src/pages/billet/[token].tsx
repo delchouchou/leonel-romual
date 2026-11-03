@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import QRCode from '@/components/QRCode'
 
-type GuestTicket = { guest_name: string; party_size: number; token: string; checked_in_at: string | null }
+type GuestTicket = { guest_name: string; party_size: number; token: string }
 
 const GuestTicketPage: FC = () => {
   const router = useRouter()
@@ -46,9 +46,8 @@ const GuestTicketPage: FC = () => {
             <p>Jeudi 17 &amp; vendredi 18 décembre 2026<br />Nkongsamba, Cameroun</p>
             <p className="demo-ticket-card__code">{ticket.party_size} place{ticket.party_size > 1 ? 's' : ''} · Billet personnel</p>
             {ticketUrl && <QRCode value={ticketUrl} title={`QR code d’entrée de ${ticket.guest_name}`} />}
-            {ticket.checked_in_at && <p className="demo-ticket-card__used" role="status">Entrée déjà enregistrée.</p>}
             <button className="demo-ticket-card__download" type="button" onClick={() => window.print()}>Télécharger mon billet (PDF)</button>
-            <p className="demo-ticket-card__warning">Présentez ce code à l’équipe d’accueil. Il sera vérifié une seule fois.</p>
+            <p className="demo-ticket-card__warning">Présentez ce code à l’équipe d’accueil. Le nom sera vérifié puis coché sur la feuille d’entrée.</p>
             <Link href={`/controle-acces?code=${encodeURIComponent(ticket.token)}`}><a className="demo-ticket-card__staff-link">Équipe d’accueil : vérifier ce billet</a></Link>
           </>
         )}
