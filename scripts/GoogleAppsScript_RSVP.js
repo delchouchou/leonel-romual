@@ -41,7 +41,7 @@ function getTargetSheet(sheetName = SHEET_NAME) {
   if (!sheet) {
     // Si l'onglet n'existe pas, on tente de le créer
     try {
-      sheet = ss.insertSheet(SHEET_NAME);
+      sheet = ss.insertSheet(sheetName);
     } catch (e) {
       // Sinon on prend le premier onglet actif existant
       sheet = ss.getSheets()[0];
@@ -184,7 +184,7 @@ function doGet(e) {
   return ContentService
     .createTextOutput(JSON.stringify({
       status: "active",
-      message: "Webhook Google Sheet pour les réservations de mariage opérationnel.",
+      message: "Webhook Google Sheet pour les réservations et cadeaux opérationnel.",
       sheetName: SHEET_NAME
     }))
     .setMimeType(ContentService.MimeType.JSON);
