@@ -11,11 +11,8 @@
 const SHEET_NAME = "Réservations";
 const GIFT_SHEET_NAME = "Cadeaux";
 
-// ID de votre Google Sheet (Optionnel) :
-// Si vous avez ouvert Apps Script depuis votre feuille (Extensions > Apps Script), laissez vide "".
-// Si vous avez créé le script sur script.google.com, collez l'ID présent dans l'URL de votre Google Sheet :
-// https://docs.google.com/spreadsheets/d/VOTRE_ID_ICI/edit
-const SPREADSHEET_ID = ""; 
+// ID du classeur cible, nécessaire ici car le script est exécuté comme application Web.
+const SPREADSHEET_ID = "1KbrbPr_ps2pWnyauA-K06ujxqOaJAfOYX8SHVMWx43c";
 
 // Email des mariés pour recevoir les alertes instantanées
 const ADMIN_EMAIL = "delchere.dontsa@aims-cameroon.org";

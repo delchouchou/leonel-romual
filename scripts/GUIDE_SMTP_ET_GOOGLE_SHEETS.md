@@ -39,6 +39,7 @@ Un script complet et amélioré est inclus dans [`scripts/GoogleAppsScript_RSVP.
    - Nommez votre premier onglet en bas **`Réservations`** (ou laissez le nom par défaut, le script gère les deux automatiquement !).
 2. Dans le menu en haut de votre Google Sheet, cliquez sur **Extensions** > **Apps Script**.
 3. Supprimez tout code existant dans la fenêtre et collez l'intégralité du code de [`scripts/GoogleAppsScript_RSVP.js`](./GoogleAppsScript_RSVP.js).
+   - L’ID de votre feuille cible doit être renseigné dans `SPREADSHEET_ID` dans le script.
 4. *(Optionnel)* Tout en haut du script :
    - `SHEET_NAME` : le nom de l'onglet (par défaut `"Réservations"`).
    - `SPREADSHEET_ID` : si vous avez ouvert Apps Script depuis votre feuille, laissez vide `""`. Si vous utilisez un script autonome, collez l'ID qui se trouve dans l'URL de votre Google Sheet.
