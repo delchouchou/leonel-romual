@@ -2294,17 +2294,13 @@ a {
 }
 
 /* Histoire, localisation, cadeaux et contacts */
-.history-section { position: relative; overflow: hidden; padding: clamp(72px,10vw,128px) clamp(20px,5vw,48px); background: #f8f0fa; }
-.history-section::before { position: absolute; z-index: 1; inset: 0; content: ""; background: linear-gradient(90deg,#f8f0fa 0%,rgba(248,240,250,.96) 34%,rgba(248,240,250,.68) 64%,rgba(248,240,250,.25) 100%); pointer-events: none; }
-.history-section__inner { position: relative; z-index: 2; width: min(100%,1120px); margin: 0 auto; }
+.history-section { position: relative; overflow: hidden; padding: clamp(72px,10vw,128px) clamp(20px,5vw,48px); background-color: #f8f0fa; background-size: cover; background-position: center right; }
+.history-section__inner { position: relative; width: min(100%,1120px); margin: 0 auto; }
 .history-section__copy { position: relative; z-index: 1; max-width: 790px; padding: clamp(24px,4vw,48px); background: rgba(255,251,253,.9); border: 1px solid rgba(137,80,160,.22); box-shadow: 0 22px 70px rgba(74,36,90,.1); }
 .history-section__eyebrow,.locations-section__eyebrow,.gift-registry-section__eyebrow,.contacts-section__eyebrow { margin: 0 0 16px; color: #a44886; font: 9px "DM Mono",monospace; letter-spacing: .18em; text-transform: uppercase; }
 .history-section h2,.locations-section h2,.gift-registry-section h2,.contacts-section h2 { margin: 0 0 20px; color: #4d2b64; font: 500 clamp(36px,5vw,58px)/.98 "Cormorant Garamond",Georgia,serif; }
 .history-section h2 em { color: #a24886; font-weight: 400; }
 .history-section__copy > p:not(.history-section__eyebrow) { color: #55455d; font-size: clamp(16px,1.7vw,19px); line-height: 1.65; }
-.history-section__image { position: absolute; z-index: 0; top: 0; right: -2vw; width: min(68%,780px); height: 100%; overflow: hidden; opacity: .72; }
-.history-section__image::after { position: absolute; inset: 0; content: ""; background: linear-gradient(90deg,#f8f0fa 0%,rgba(248,240,250,.12) 42%,rgba(248,240,250,0) 100%); }
-.history-section__image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .locations-section,.contacts-section { padding: clamp(70px,9vw,108px) clamp(20px,5vw,48px); background: #fffafd; }
 .locations-section__inner,.gift-registry-section__inner,.contacts-section__inner { width: min(100%,1100px); margin: 0 auto; }
 .locations-section__intro,.gift-registry-section__intro,.contacts-section__intro { max-width: 62ch; margin: 0 0 32px; color: #6d5d73; font-size: 17px; }
@@ -2352,6 +2348,8 @@ a {
 .contact-card h3 { margin: 9px 0 6px; color: #4f2e62; font: 600 22px "Cormorant Garamond",Georgia,serif; }
 .contact-card p { margin: 0; color: #865185; font: 12px "DM Mono",monospace; }
 .wedding-ticket-model-note { max-width: 660px; margin: 20px auto 0; color: #796981; font-size: 14px; text-align: center; }
+.wedding-ticket-actions { flex-direction: column; align-items: center; gap: 8px; }
+.wedding-ticket-download-help { margin: 0; color: #827487; font-size: 12px; text-align: center; }
 .demo-tickets-page,.demo-ticket-page { min-height: 100vh; padding: 40px clamp(16px,4vw,48px); background: #faf5fb; color: #40284b; font-family: Georgia,serif; }
 .demo-tickets-page__inner { width: min(100%,1120px); margin: 0 auto; }
 .demo-tickets-page__back,.demo-ticket-card__back { display: inline-block; margin-bottom: 24px; color: #76477e; font: 10px "DM Mono",monospace; text-decoration: none; text-transform: uppercase; }
@@ -2380,8 +2378,7 @@ a {
 .demo-ticket-card__back { margin: 22px 0 0; }
 
 @media (max-width:760px) {
-  .history-section__image { right: 0; width: 100%; opacity: .27; }
-  .history-section::before { background: rgba(248,240,250,.62); }
+  .history-section { background-position: center; }
   .history-section__copy { padding: 26px 22px; }
   .locations-grid,.gift-options,.contacts-grid { grid-template-columns: 1fr; }
   .gift-registry-content .gift-options { grid-template-columns: repeat(2,minmax(0,1fr)); }

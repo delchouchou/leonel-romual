@@ -93,10 +93,13 @@ const InvitationSection: FC = () => {
         <ScrollReveal>
           <p className="section__eyebrow">01 / {t('navInvitation')}</p>
           <h2 id="invitation-title" className="section__title">{t('invitationTitle')}</h2>
-          <p className="section__lead">{t('invitationLead')}</p>
         </ScrollReveal>
         <div className="wedding-ticket-stage"><WeddingInvitationCard /></div>
-        <p className="wedding-ticket-model-note">Aperçu du modèle de faire-part. Les billets nominatifs avec QR code seront associés individuellement aux invités pour le contrôle à l’entrée.</p>
+        <p className="wedding-ticket-model-note">Ce faire-part est un aperçu téléchargeable. Pour entrer le jour du mariage, chaque invité devra présenter son billet nominatif avec son QR code unique.</p>
+        <div className="wedding-ticket-actions">
+          <button type="button" onClick={() => window.print()} className="wedding-ticket__print">Télécharger le faire-part (PDF)</button>
+          <p className="wedding-ticket-download-help">Dans la fenêtre qui s’ouvre, choisissez « Enregistrer au format PDF ».</p>
+        </div>
       </div>
     </section>
   )
