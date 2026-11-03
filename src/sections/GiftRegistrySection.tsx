@@ -46,7 +46,7 @@ const GiftRegistrySection: FC = () => {
   return (
     <section id="cadeaux" className="gift-registry-section" aria-labelledby="gift-registry-title">
       <div className="gift-registry-section__inner">
-        <p className="gift-registry-section__eyebrow">Une attention pour notre nouvelle vie</p>
+        <p className="gift-registry-section__eyebrow">Cadeaux</p>
         <h2 id="gift-registry-title">Votre présence est notre plus beau cadeau</h2>
         <p className="gift-registry-section__intro">Votre présence est notre plus beau cadeau. Si vous souhaitez tout de même nous offrir un présent, nous avons préparé une liste d’idées. Pour vous éviter de vous encombrer avec le transport d’un paquet le jour du mariage, vous pouvez choisir le cadeau qui vous plaît et nous l’offrir à distance. Cliquez sur « Choisir un cadeau » pour découvrir la liste.</p>
         <button
