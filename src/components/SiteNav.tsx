@@ -3,9 +3,11 @@ import { useLocale } from '@/context/locale-context'
 
 const NAV_ITEMS = [
   { id: 'home', labelKey: 'navHome' },
+  { id: 'histoire', labelKey: 'navStory' },
   { id: 'invitation', labelKey: 'navInvitation' },
-  { id: 'countdown', labelKey: 'navCountdown' },
-  { id: 'program', labelKey: 'navProgram' },
+  { id: 'lieux', labelKey: 'navLocations' },
+  { id: 'cadeaux', labelKey: 'navGifts' },
+  { id: 'contacts', labelKey: 'navContacts' },
   { id: 'dress-code', labelKey: 'navDress' },
 ] as const
 

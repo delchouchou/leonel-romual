@@ -6,6 +6,10 @@ import WeddingHero from '@/sections/WeddingHero'
 import InvitationSection from '@/sections/InvitationSection'
 import CountdownSection from '@/sections/CountdownSection'
 import DressCodeSection from '@/sections/DressCodeSection'
+import StorySection from '@/sections/StorySection'
+import LocationsSection from '@/sections/LocationsSection'
+import GiftRegistrySection from '@/sections/GiftRegistrySection'
+import ContactsSection from '@/sections/ContactsSection'
 
 const Home: NextPage = () => {
   return (
@@ -13,8 +17,12 @@ const Home: NextPage = () => {
       <SiteNav />
       <main>
         <WeddingHero />
+        <StorySection />
         <InvitationSection />
         <CountdownSection />
+        <LocationsSection />
+        <GiftRegistrySection />
+        <ContactsSection />
         <DressCodeSection />
       </main>
       <SiteFooter />

@@ -96,9 +96,7 @@ const InvitationSection: FC = () => {
           <p className="section__lead">{t('invitationLead')}</p>
         </ScrollReveal>
         <div className="wedding-ticket-stage"><WeddingInvitationCard /></div>
-        <div className="wedding-ticket-actions">
-          <button type="button" onClick={() => window.print()} className="wedding-ticket__print">Télécharger le faire-part</button>
-        </div>
+        <p className="wedding-ticket-model-note">Aperçu du modèle de faire-part. Les billets nominatifs avec QR code seront associés individuellement aux invités pour le contrôle à l’entrée.</p>
       </div>
     </section>
   )

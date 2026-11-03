@@ -1,84 +1,24 @@
-import React, { FC, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import ScrollReveal from '@/components/ScrollReveal'
-import { useLocale } from '@/context/locale-context'
-import { STORY_CHAPTERS } from './story/storyChapterConfig'
+import React, { FC } from 'react'
 
-const INITIAL_CHAPTER_COUNT = 2
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-const formatStoryParagraph = (rawText: string, baseKey: string): React.ReactNode => {
-  const lines = rawText.split('\n').filter((l) => l.trim().length > 0)
-
-  return lines.map((line, lineIdx) => (
-    <span key={`${baseKey}-line-${lineIdx}`} className="story__paragraph-block">
-      {line}
-    </span>
-  ))
-}
-
-const StorySection: FC = () => {
-  const { t } = useLocale()
-  const prefersReducedMotion = useReducedMotion()
-  const [expanded, setExpanded] = useState(false)
-
-  const visibleChapters = STORY_CHAPTERS.slice(0, INITIAL_CHAPTER_COUNT)
-  const hiddenChapters = STORY_CHAPTERS.slice(INITIAL_CHAPTER_COUNT)
-
-  const renderChapter = (chapter: (typeof STORY_CHAPTERS)[number]): React.ReactNode => (
-    <div key={chapter.id} className="story__chapter">
-      {chapter.bodyKeys.map((key) => (
-        <p key={key} className="story__paragraph">
-          {formatStoryParagraph(t(key), key)}
-        </p>
-      ))}
-    </div>
-  )
-
-  return (
-    <section id="story" className="section section--story" aria-labelledby="story-title">
-      <div className="section__inner">
-        <ScrollReveal>
-          <p className="section__eyebrow">01 / {t('story')}</p>
-          <h2 id="story-title" className="section__title">
-            {t('story')}
-          </h2>
-          <p className="section__lead">{formatStoryParagraph(t('storyIntro'), 'intro')}</p>
-        </ScrollReveal>
-
-        <div className="story__body">
-          {visibleChapters.slice(1).map(renderChapter)}
-
-          {!expanded && (
-            <button type="button" className="story__read-more" onClick={() => setExpanded(true)} aria-expanded={false}>
-              {t('storyReadMore')}
-            </button>
-          )}
-
-          <AnimatePresence initial={false}>
-            {expanded && (
-              <motion.div
-                className="story__rest"
-                initial={prefersReducedMotion ? false : { opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={prefersReducedMotion ? undefined : { opacity: 0, height: 0 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {hiddenChapters.map(renderChapter)}
-                <button
-                  type="button"
-                  className="story__read-more story__read-more--less"
-                  onClick={() => setExpanded(false)}
-                  aria-expanded={true}
-                >
-                  {t('storyReadLess')}
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+const StorySection: FC = () => (
+  <section id="histoire" className="history-section" aria-labelledby="history-title">
+    <div className="history-section__inner">
+      <div className="history-section__copy">
+        <p className="history-section__eyebrow">Notre histoire · Leonelle &amp; Romuald</p>
+        <h2 id="history-title">Deux cœurs, deux chemins,<br /><em>une seule destinée…</em></h2>
+        <p>Au fil du temps, nos chemins se sont croisés, nos cœurs se sont rapprochés et notre amour a grandi. Aujourd'hui, portés par cet amour et guidés par la grâce de Dieu, nous avons choisi de nous unir pour écrire ensemble les plus belles pages de notre histoire.</p>
+        <p>Main dans la main, nous faisons le vœu de nous aimer, de nous soutenir et de nous choisir chaque jour, pour le meilleur et pour toujours.</p>
+        <p>C'est avec une immense joie que nous vous annonçons notre mariage et vous invitons à célébrer avec nous le début de cette merveilleuse aventure à deux.</p>
       </div>
-    </section>
-  )
-}
+      <div className="history-section__image" aria-hidden="true">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={`${basePath}/images/alliances-histoire.png`} alt="" />
+        <span>Unis par l’amour</span>
+      </div>
+    </div>
+  </section>
+)
 
 export default StorySection

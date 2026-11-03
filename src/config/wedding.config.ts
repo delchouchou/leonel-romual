@@ -3,7 +3,7 @@ import { WeddingConfigType } from "@/interfaces/config"
 const weddingConfig: WeddingConfigType = {
     people: {
         bride: { firstName: 'Leonelle', lastName: '' },
-        groom: { firstName: 'Romuald Franklin', lastName: '' }
+        groom: { firstName: 'Romuald', lastName: '' }
     },
     date: {
         date: '2026-12-18',
