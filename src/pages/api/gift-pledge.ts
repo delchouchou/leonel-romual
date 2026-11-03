@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import nodemailer from 'nodemailer'
 import { weddingGiftList } from '@/config/gift-list'
 
 type GiftPledgeRequest = {
@@ -9,13 +8,6 @@ type GiftPledgeRequest = {
 }
 
 type GiftPledgeResponse = { success: boolean; message: string }
-
-const escapeHtml = (value: string): string => value
-  .replace(/&/g, '&amp;')
-  .replace(/</g, '&lt;')
-  .replace(/>/g, '&gt;')
-  .replace(/"/g, '&quot;')
-  .replace(/'/g, '&#039;')
 
 export default async function handler(
   req: NextApiRequest,
@@ -37,39 +29,33 @@ export default async function handler(
     return
   }
 
-  const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com'
-  const smtpPort = Number(process.env.SMTP_PORT) || 587
-  const smtpUser = process.env.SMTP_USER
-  const smtpPass = process.env.SMTP_PASS
-  const notificationEmail = process.env.GIFT_NOTIFICATION_EMAIL
-
-  if (!smtpUser || !smtpPass || !notificationEmail) {
-    res.status(503).json({ success: false, message: 'La réception des confirmations de cadeaux n’est pas encore configurée.' })
+  const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL || process.env.NEXT_PUBLIC_GOOGLE_SHEET_WEBHOOK_URL
+  if (!webhookUrl) {
+    res.status(503).json({ success: false, message: 'La feuille Google des cadeaux n’est pas encore reliée au site.' })
     return
   }
 
   try {
-    const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: smtpPort,
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: { user: smtpUser, pass: smtpPass },
+    const sheetResponse = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'gift',
+        timestamp: new Date().toISOString(),
+        fullName: guestName,
+        giftName: gift.name,
+        amount: gift.amount,
+        transactionReference: reference,
+      }),
     })
-    const safeName = escapeHtml(guestName)
-    const safeReference = escapeHtml(reference)
-    const amount = new Intl.NumberFormat('fr-FR').format(gift.amount)
+    const sheetResult = await sheetResponse.json() as { status?: string; message?: string }
+    if (!sheetResponse.ok || sheetResult.status !== 'success') {
+      throw new Error(sheetResult.message || 'Google Sheets n’a pas confirmé l’enregistrement.')
+    }
 
-    await transporter.sendMail({
-      from: process.env.SMTP_FROM || smtpUser,
-      to: notificationEmail,
-      subject: `Cadeau de mariage : ${gift.name} · ${amount} FCFA`,
-      text: `Nom : ${guestName}\nCadeau choisi : ${gift.name}\nPrix : ${amount} FCFA\nRéférence du paiement : ${reference}`,
-      html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;padding:24px;color:#43264f"><h2>Cadeau choisi</h2><p><strong>Invité(e) :</strong> ${safeName}</p><p><strong>Cadeau :</strong> ${escapeHtml(gift.name)}</p><p><strong>Prix :</strong> ${amount} FCFA</p><p><strong>Référence du paiement :</strong> ${safeReference}</p></div>`,
-    })
-
-    res.status(200).json({ success: true, message: 'Les informations du cadeau ont été envoyées à l’adresse prévue pour les mariés.' })
+    res.status(200).json({ success: true, message: 'Les informations de votre cadeau ont été enregistrées dans la feuille Google des mariés.' })
   } catch (error) {
-    console.error('Gift contribution notification failed', error)
-    res.status(502).json({ success: false, message: 'La notification n’a pas pu être envoyée. Réessayez ou contactez les mariés.' })
+    console.error('Gift record Google Sheets failed', error)
+    res.status(502).json({ success: false, message: 'L’enregistrement dans la feuille Google a échoué. Réessayez ou contactez les mariés.' })
   }
 }

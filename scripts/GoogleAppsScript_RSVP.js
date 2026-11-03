@@ -9,6 +9,7 @@
 // Nom de l'onglet dans votre Google Sheet (ex: "Réservations" ou "Feuille 1" ou "Sheet1")
 // S'il n'existe pas, le script le créera automatiquement !
 const SHEET_NAME = "Réservations";
+const GIFT_SHEET_NAME = "Cadeaux";
 
 // ID de votre Google Sheet (Optionnel) :
 // Si vous avez ouvert Apps Script depuis votre feuille (Extensions > Apps Script), laissez vide "".
@@ -23,7 +24,7 @@ const ADMIN_EMAIL = "delchere.dontsa@aims-cameroon.org";
 /**
  * FONCTION POUR TROUVER OU CRÉER L'ONGLET DE DESTINATION
  */
-function getTargetSheet() {
+function getTargetSheet(sheetName = SHEET_NAME) {
   let ss;
   if (SPREADSHEET_ID && SPREADSHEET_ID.trim() !== "") {
     ss = SpreadsheetApp.openById(SPREADSHEET_ID.trim());
@@ -36,7 +37,7 @@ function getTargetSheet() {
   }
 
   // Cherche l'onglet avec le nom configuré
-  let sheet = ss.getSheetByName(SHEET_NAME);
+  let sheet = ss.getSheetByName(sheetName);
   if (!sheet) {
     // Si l'onglet n'existe pas, on tente de le créer
     try {
@@ -64,6 +65,32 @@ function doPost(e) {
       }
     } else if (e && e.parameter) {
       data = e.parameter;
+    }
+
+    // Les déclarations de cadeaux sont stockées dans un onglet séparé.
+    if (data.type === "gift") {
+      const giftSheet = getTargetSheet(GIFT_SHEET_NAME);
+      if (giftSheet.getLastRow() === 0) {
+        giftSheet.appendRow(["Horodatage", "Nom complet", "Cadeau choisi", "Prix (FCFA)", "Référence du paiement"]);
+        const headerRange = giftSheet.getRange(1, 1, 1, 5);
+        headerRange.setFontWeight("bold");
+        headerRange.setBackground("#75458e");
+        headerRange.setFontColor("#ffffff");
+        headerRange.setHorizontalAlignment("center");
+        giftSheet.setFrozenRows(1);
+      }
+
+      giftSheet.appendRow([
+        data.timestamp || new Date().toISOString(),
+        data.fullName || "",
+        data.giftName || "",
+        Number(data.amount) || 0,
+        data.transactionReference || ""
+      ]);
+
+      return ContentService
+        .createTextOutput(JSON.stringify({ status: "success", message: "Cadeau enregistré dans Google Sheet" }))
+        .setMimeType(ContentService.MimeType.JSON);
     }
 
     const sheet = getTargetSheet();

@@ -1,4 +1,4 @@
-# 💌 Guide de Configuration : SMTP & Google Sheets pour les Réservations
+# 💌 Guide de Configuration : SMTP & Google Sheets
 
 Ce guide vous explique pas à pas comment activer l'envoi d'emails par **SMTP** et l'enregistrement automatique de toutes les réservations dans votre **Google Sheet**.
 
@@ -64,6 +64,8 @@ Avant même de brancher le site, vous pouvez tester que le script écrit bien da
     NEXT_PUBLIC_GOOGLE_SHEET_WEBHOOK_URL=https://script.google.com/macros/s/AKfycb.../exec
     GOOGLE_SHEET_WEBHOOK_URL=https://script.google.com/macros/s/AKfycb.../exec
     ```
+
+Le même webhook enregistre aussi les cadeaux : le script crée automatiquement un onglet **`Cadeaux`** à côté de **`Réservations`**. Chaque confirmation de cadeau y ajoute la date, le nom de l’invité, le cadeau, son prix et la référence du paiement. Pour Vercel, ouvrez **Project → Settings → Environment Variables** et ajoutez `GOOGLE_SHEET_WEBHOOK_URL` avec cette même URL, pour l’environnement **Production**, puis redéployez. Aucune configuration SMTP n’est nécessaire pour les cadeaux.
 
 > [!IMPORTANT]
 > Si vous modifiez le code dans Google Apps Script ultérieurement, vous devez toujours faire :

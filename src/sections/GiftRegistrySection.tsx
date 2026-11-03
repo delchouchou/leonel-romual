@@ -31,7 +31,7 @@ const GiftRegistrySection: FC = () => {
       })
       const result = await response.json()
       if (!response.ok) throw new Error(result.message || 'La déclaration du cadeau a échoué.')
-      setFeedback('Merci ! Les informations de votre cadeau ont été envoyées à l’adresse de contact des mariés.')
+      setFeedback('Merci ! Les informations de votre cadeau ont été enregistrées dans la feuille Google des mariés.')
       setIsSuccess(true)
       setFullName('')
       setTransactionReference('')
