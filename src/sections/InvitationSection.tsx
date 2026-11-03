@@ -97,6 +97,7 @@ const InvitationSection: FC = () => {
         <div className="wedding-ticket-stage"><WeddingInvitationCard /></div>
         <p className="wedding-ticket-model-note">Ce faire-part est un aperçu téléchargeable. Pour entrer le jour du mariage, chaque invité devra présenter son billet nominatif avec son QR code unique.</p>
         <div className="wedding-ticket-actions">
+          <a href="/mon-billet" className="wedding-ticket__print">Obtenir mon billet nominatif avec mon QR</a>
           <button type="button" onClick={() => window.print()} className="wedding-ticket__print">Télécharger le faire-part (PDF)</button>
           <p className="wedding-ticket-download-help">Dans la fenêtre qui s’ouvre, choisissez « Enregistrer au format PDF ».</p>
         </div>

@@ -2,13 +2,14 @@ import React, { FC, useCallback, useState } from 'react'
 import { useLocale } from '@/context/locale-context'
 
 const NAV_ITEMS = [
-  { id: 'home', labelKey: 'navHome' },
-  { id: 'histoire', labelKey: 'navStory' },
-  { id: 'invitation', labelKey: 'navInvitation' },
-  { id: 'lieux', labelKey: 'navLocations' },
-  { id: 'cadeaux', labelKey: 'navGifts' },
-  { id: 'contacts', labelKey: 'navContacts' },
-  { id: 'dress-code', labelKey: 'navDress' },
+  { href: '#home', labelKey: 'navHome' },
+  { href: '#histoire', labelKey: 'navStory' },
+  { href: '#invitation', labelKey: 'navInvitation' },
+  { href: '#lieux', labelKey: 'navLocations' },
+  { href: '#cadeaux', labelKey: 'navGifts' },
+  { href: '#contacts', labelKey: 'navContacts' },
+  { href: '#dress-code', labelKey: 'navDress' },
+  { href: '/mon-billet', labelKey: 'navMyTicket' },
 ] as const
 
 const SiteNav: FC = () => {
@@ -43,9 +44,9 @@ const SiteNav: FC = () => {
 
         <nav id="site-nav-menu" className={`site-nav__menu${open ? ' site-nav__menu--open' : ''}`} aria-label={t('menu')}>
           <ul className="site-nav__list">
-            {NAV_ITEMS.map(({ id, labelKey }) => (
-              <li key={id}>
-                <a href={`#${id}`} onClick={handleNavClick}>
+            {NAV_ITEMS.map(({ href, labelKey }) => (
+              <li key={href}>
+                <a href={href} onClick={handleNavClick}>
                   {t(labelKey)}
                 </a>
               </li>

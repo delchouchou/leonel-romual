@@ -2376,6 +2376,22 @@ a {
 .demo-ticket-card__used { padding: 12px; background: #fcecef; color: #8d3155; }
 .demo-ticket-card__warning { margin: 18px 0; color: #817488; font-size: 12px; line-height: 1.5; }
 .demo-ticket-card__back { margin: 22px 0 0; }
+.my-ticket-card__reset { display: block; margin: 18px auto 0 !important; padding: 8px 0 !important; background: transparent !important; color: #75458e !important; text-decoration: underline; }
+.demo-ticket-card__staff-link { display: inline-block; margin-top: 18px; color: #75458e; font: 9px "DM Mono",monospace; text-transform: uppercase; }
+.ticket-admin-login,.ticket-create-form { max-width: 620px; margin: 24px 0 34px; }
+.ticket-create-form h2 { margin: 0 0 16px; color: #4f2e62; font: 600 28px "Cormorant Garamond",Georgia,serif; }
+.checkin-tools { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 16px; max-width: 760px; padding: 22px; border: 1px solid #e5d7eb; background: white; }
+.checkin-tools label,.checkin-manual-form label { display: grid; gap: 7px; color: #593b66; font: 10px "DM Mono",monospace; letter-spacing: .05em; text-transform: uppercase; }
+.checkin-tools input { width: 100%; min-width: 0; padding: 12px; border: 1px solid #dcc9e1; color: #382140; font: 15px Georgia,serif; text-transform: none; }
+.checkin-tools > button,.checkin-manual-form button { padding: 13px 18px; border: 0; background: #75458e; color: #fff; font: 9px "DM Mono",monospace; text-transform: uppercase; cursor: pointer; }
+.checkin-camera { grid-column: 1/-1; display: block; width: min(100%,560px); max-height: 56vh; margin: 0 auto; background: #211429; }
+.checkin-manual-form { grid-column: 1/-1; display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 12px; }
+.checkin-result { max-width: 760px; margin: 20px 0; padding: 22px 24px; border: 1px solid #d9c4e2; background: white; }
+.checkin-result--checked-in { border-color: #56a16c; background: #f1faf3; }
+.checkin-result--already-used,.checkin-result--invalid { border-color: #d47a93; background: #fff3f5; }
+.checkin-result__status { margin: 0 0 8px; font: 12px "DM Mono",monospace; text-transform: uppercase; }
+.checkin-result h2 { margin: 0 0 5px; color: #4d2b64; font: 600 32px "Cormorant Garamond",Georgia,serif; }
+.checkin-result p { margin: 5px 0 0; color: #62516a; }
 
 @media (max-width:760px) {
   .history-section { background-position: center; }
@@ -2384,6 +2400,8 @@ a {
   .gift-registry-content .gift-options { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .gift-option { min-height: 0; }
   .demo-guest-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .checkin-tools { grid-template-columns: 1fr; }
+  .checkin-manual-form { grid-template-columns: 1fr; }
 }
 @media (max-width:480px) {
   .gift-registry-content .gift-options { grid-template-columns: 1fr; }
@@ -2394,4 +2412,5 @@ a {
   .demo-ticket-card,.demo-ticket-card * { visibility: visible !important; }
   .demo-ticket-card { position: absolute; top: 0; left: 0; width: 100%; max-width: none; min-height: 0; margin: 0; border: 0; box-shadow: none; }
   .demo-ticket-card__download,.demo-ticket-card > button { display: none !important; }
+  .demo-ticket-card__staff-link,.my-ticket-card__reset { display: none !important; }
 }
