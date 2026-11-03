@@ -20,7 +20,6 @@ const LocationsSection: FC = () => (
           </article>
         ))}
       </div>
-      <p className="locations-section__note">Le lieu précis de la dot sera ajouté dès qu’il sera communiqué.</p>
     </div>
   </section>
 )

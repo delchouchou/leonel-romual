@@ -80,20 +80,25 @@ const GiftRegistrySection: FC = () => {
               <form className="gift-pledge-form" onSubmit={submitPledge}>
                 <p className="gift-pledge-form__eyebrow">Votre choix</p>
                 <h3>{selected.name} · {formatAmount(selected.amount)} FCFA</h3>
-                <p>Après avoir effectué le transfert avec les coordonnées communiquées par les mariés, indiquez votre nom et la référence du paiement. Ces informations leur permettront d’identifier le cadeau que vous avez offert.</p>
+                <div className="gift-transfer-details">
+                  <span>Coordonnées pour le dépôt</span>
+                  <strong>+237 690 549 506</strong>
+                  <p>Nom du bénéficiaire : <b>Tchapda Djomo Ornella</b></p>
+                </div>
+                <p>Effectuez le dépôt du montant indiqué, puis saisissez votre nom et la référence du paiement. Les mariés pourront ainsi identifier le cadeau que vous leur avez offert.</p>
                 <label>
                   Votre nom complet
                   <input required maxLength={120} value={fullName} onChange={(event) => setFullName(event.target.value)} autoComplete="name" />
                 </label>
                 <label>
                   Référence du paiement
-                  <input required maxLength={100} value={transactionReference} onChange={(event) => setTransactionReference(event.target.value)} />
+                  <input id="gift-transaction-reference" required maxLength={100} value={transactionReference} onChange={(event) => setTransactionReference(event.target.value)} aria-describedby="gift-transaction-help" />
+                  <small id="gift-transaction-help" className="gift-transaction-help">Elle figure dans le SMS de confirmation ou l’historique Mobile Money après le transfert. N’indiquez jamais votre code PIN ni un code secret.</small>
                 </label>
                 <button type="submit" disabled={sending}>{sending ? 'Envoi…' : 'Envoyer les informations aux mariés'}</button>
                 {feedback && <p className={`gift-pledge-form__feedback${isSuccess ? ' gift-pledge-form__feedback--success' : ''}`} role="status">{feedback}</p>}
               </form>
             )}
-            <p className="gift-registry-section__note">Le numéro ou lien Mobile Money pour effectuer le dépôt sera ajouté dès que les coordonnées des mariés seront disponibles.</p>
           </div>
         )}
       </div>

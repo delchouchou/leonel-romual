@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 
 const contacts = [
-  { title: 'Accueil & orientation', number: '+237 6XX XXX 001' },
-  { title: 'Cérémonies', number: '+237 6XX XXX 002' },
-  { title: 'Réception & cadeaux', number: '+237 6XX XXX 003' },
+  { title: 'Contact 1', number: '+237 98703686', tel: '+23798703686' },
+  { title: 'Contact 2', number: '+237 6 93 73 17 62', tel: '+237693731762' },
+  { title: 'Contact 3', number: '+237 6 55 52 30 61', tel: '+237655523061' },
 ]
 
 const ContactsSection: FC = () => (
@@ -17,11 +17,10 @@ const ContactsSection: FC = () => (
           <article className="contact-card" key={contact.title}>
             <span aria-hidden="true">✦</span>
             <h3>{contact.title}</h3>
-            <p>{contact.number}</p>
+            <p><a href={`tel:${contact.tel}`}>{contact.number}</a></p>
           </article>
         ))}
       </div>
-      <p className="contacts-section__note">Les numéros affichés sont des emplacements fictifs au format camerounais ; ils seront remplacés par les vrais contacts.</p>
     </div>
   </section>
 )

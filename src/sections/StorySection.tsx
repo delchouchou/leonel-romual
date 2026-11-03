@@ -7,7 +7,7 @@ const StorySection: FC = () => (
     id="histoire"
     className="history-section"
     aria-labelledby="history-title"
-    style={{ backgroundImage: `linear-gradient(90deg, rgba(248,240,250,.94) 0%, rgba(248,240,250,.88) 46%, rgba(248,240,250,.48) 100%), url("${basePath}/images/alliances-histoire.png")` }}
+    style={{ backgroundImage: `url("${basePath}/images/alliances-histoire.png")` }}
   >
     <div className="history-section__inner">
       <div className="history-section__copy">
