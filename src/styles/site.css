@@ -2341,7 +2341,6 @@ a {
 .gift-transfer-details > strong { color: #4f2e62; font: 600 22px "Cormorant Garamond",Georgia,serif; }
 .gift-transfer-details > p { margin: 0; color: #6d5d73; font-size: 13px; }
 .gift-pledge-form label { display: grid; gap: 7px; margin-top: 16px; color: #593b66; font: 10px "DM Mono",monospace; letter-spacing: .05em; text-transform: uppercase; }
-.gift-transaction-help { color: #786b7d; font: 12px/1.5 Georgia,serif; letter-spacing: 0; text-transform: none; }
 .gift-pledge-form input { width: 100%; padding: 12px 13px; border: 1px solid #dcc9e1; background: #fff; color: #382140; font: 15px Georgia,serif; text-transform: none; }
 .gift-pledge-form > button { margin-top: 20px; padding: 13px 18px; border: 0; background: #75458e; color: white; font: 9px "DM Mono",monospace; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
 .gift-pledge-form > button:disabled { opacity: .55; cursor: wait; }

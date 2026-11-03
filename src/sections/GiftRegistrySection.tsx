@@ -7,7 +7,6 @@ const GiftRegistrySection: FC = () => {
   const [showList, setShowList] = useState(false)
   const [selected, setSelected] = useState<WeddingGift | null>(null)
   const [fullName, setFullName] = useState('')
-  const [transactionReference, setTransactionReference] = useState('')
   const [sending, setSending] = useState(false)
   const [feedback, setFeedback] = useState('')
   const [isSuccess, setIsSuccess] = useState(false)
@@ -27,14 +26,13 @@ const GiftRegistrySection: FC = () => {
       const response = await fetch('/api/gift-pledge', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName, giftId: selected.id, transactionReference }),
+        body: JSON.stringify({ fullName, giftId: selected.id }),
       })
       const result = await response.json()
       if (!response.ok) throw new Error(result.message || 'La déclaration du cadeau a échoué.')
-      setFeedback('Merci ! Les informations de votre cadeau ont été enregistrées dans la feuille Google des mariés.')
+      setFeedback('Merci ! Votre choix a été transmis aux mariés. Vous pourrez effectuer le dépôt ensuite.')
       setIsSuccess(true)
       setFullName('')
-      setTransactionReference('')
     } catch (error) {
       setFeedback(error instanceof Error ? error.message : 'Impossible d’enregistrer ce cadeau pour le moment.')
       setIsSuccess(false)
@@ -85,17 +83,12 @@ const GiftRegistrySection: FC = () => {
                   <strong>+237 690 549 506</strong>
                   <p>Nom du bénéficiaire : <b>Tchapda Djomo Ornella</b></p>
                 </div>
-                <p>Effectuez le dépôt du montant indiqué, puis saisissez votre nom et la référence du paiement. Les mariés pourront ainsi identifier le cadeau que vous leur avez offert.</p>
+                <p>Indiquez votre nom pour transmettre votre choix aux mariés. Vous pourrez effectuer le dépôt ensuite au numéro ci-dessous.</p>
                 <label>
                   Votre nom complet
                   <input required maxLength={120} value={fullName} onChange={(event) => setFullName(event.target.value)} autoComplete="name" />
                 </label>
-                <label>
-                  Référence du paiement
-                  <input id="gift-transaction-reference" required maxLength={100} value={transactionReference} onChange={(event) => setTransactionReference(event.target.value)} aria-describedby="gift-transaction-help" />
-                  <small id="gift-transaction-help" className="gift-transaction-help">Elle figure dans le SMS de confirmation ou l’historique Mobile Money après le transfert. N’indiquez jamais votre code PIN ni un code secret.</small>
-                </label>
-                <button type="submit" disabled={sending}>{sending ? 'Envoi…' : 'Envoyer les informations aux mariés'}</button>
+                <button type="submit" disabled={sending}>{sending ? 'Envoi…' : 'Envoyer mon choix aux mariés'}</button>
                 {feedback && <p className={`gift-pledge-form__feedback${isSuccess ? ' gift-pledge-form__feedback--success' : ''}`} role="status">{feedback}</p>}
               </form>
             )}

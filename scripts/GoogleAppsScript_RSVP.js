@@ -71,8 +71,8 @@ function doPost(e) {
     if (data.type === "gift") {
       const giftSheet = getTargetSheet(GIFT_SHEET_NAME);
       if (giftSheet.getLastRow() === 0) {
-        giftSheet.appendRow(["Horodatage", "Nom complet", "Cadeau choisi", "Prix (FCFA)", "Référence du paiement"]);
-        const headerRange = giftSheet.getRange(1, 1, 1, 5);
+        giftSheet.appendRow(["Horodatage", "Nom complet", "Cadeau choisi", "Prix (FCFA)"]);
+        const headerRange = giftSheet.getRange(1, 1, 1, 4);
         headerRange.setFontWeight("bold");
         headerRange.setBackground("#75458e");
         headerRange.setFontColor("#ffffff");
@@ -84,8 +84,7 @@ function doPost(e) {
         data.timestamp || new Date().toISOString(),
         data.fullName || "",
         data.giftName || "",
-        Number(data.amount) || 0,
-        data.transactionReference || ""
+        Number(data.amount) || 0
       ]);
 
       return ContentService

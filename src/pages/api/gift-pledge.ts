@@ -4,7 +4,6 @@ import { weddingGiftList } from '@/config/gift-list'
 type GiftPledgeRequest = {
   fullName?: string
   giftId?: string
-  transactionReference?: string
 }
 
 type GiftPledgeResponse = { success: boolean; message: string }
@@ -19,13 +18,12 @@ export default async function handler(
     return
   }
 
-  const { fullName = '', giftId = '', transactionReference = '' } = (req.body || {}) as GiftPledgeRequest
+  const { fullName = '', giftId = '' } = (req.body || {}) as GiftPledgeRequest
   const guestName = fullName.trim()
-  const reference = transactionReference.trim()
   const gift = weddingGiftList.find((item) => item.id === giftId)
 
-  if (!guestName || guestName.length > 120 || !reference || reference.length > 100 || !gift) {
-    res.status(400).json({ success: false, message: 'Vérifiez votre nom, le cadeau et la référence du transfert.' })
+  if (!guestName || guestName.length > 120 || !gift) {
+    res.status(400).json({ success: false, message: 'Vérifiez votre nom et le cadeau choisi.' })
     return
   }
 
@@ -45,7 +43,6 @@ export default async function handler(
         fullName: guestName,
         giftName: gift.name,
         amount: gift.amount,
-        transactionReference: reference,
       }),
     })
     const sheetResult = await sheetResponse.json() as { status?: string; message?: string }
