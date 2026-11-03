@@ -31,7 +31,7 @@ const GiftRegistrySection: FC = () => {
       })
       const result = await response.json()
       if (!response.ok) throw new Error(result.message || 'La déclaration du cadeau a échoué.')
-      setFeedback('Merci ! Les mariés ont reçu le nom, le cadeau choisi, le montant et la référence du transfert.')
+      setFeedback('Merci ! Les mariés ont reçu votre nom, le cadeau choisi, son prix et la référence du paiement.')
       setIsSuccess(true)
       setFullName('')
       setTransactionReference('')
@@ -48,8 +48,7 @@ const GiftRegistrySection: FC = () => {
       <div className="gift-registry-section__inner">
         <p className="gift-registry-section__eyebrow">Une attention pour notre nouvelle vie</p>
         <h2 id="gift-registry-title">Votre présence est notre plus beau cadeau</h2>
-        <p className="gift-registry-section__intro">Pour celles et ceux qui souhaitent nous témoigner une attention particulière, nous avons préparé une liste de cadeaux sous forme de contributions financières. Choisissez, selon vos moyens, l’idée et le montant qui vous conviennent. Votre geste nous aidera à concrétiser nos projets tout en nous évitant d’avoir à transporter et à stocker de nombreux cadeaux le jour du mariage. Merci de tout cœur pour votre générosité.</p>
-        <p className="gift-registry-section__note gift-registry-section__note--intro">La liste est masquée pour vous laisser découvrir les idées seulement si vous souhaitez offrir un cadeau. Choisissez le montant qui vous convient ; le cadeau sélectionné représente votre contribution au projet des mariés.</p>
+        <p className="gift-registry-section__intro">Votre présence est notre plus beau cadeau. Si vous souhaitez tout de même nous offrir un présent, nous avons préparé une liste d’idées. Pour vous éviter de vous encombrer avec le transport d’un paquet le jour du mariage, vous pouvez choisir le cadeau qui vous plaît et nous l’offrir à distance. Cliquez sur « Choisir un cadeau » pour découvrir la liste. Cette attention reste entièrement facultative.</p>
         <button
           type="button"
           className="gift-list-toggle"
@@ -62,7 +61,7 @@ const GiftRegistrySection: FC = () => {
 
         {showList && (
           <div id="gift-options-list" className="gift-registry-content">
-            <p className="gift-registry-section__note">20 idées de cadeaux · montants en FCFA. Plusieurs invités peuvent choisir la même idée : le versement est destiné aux mariés.</p>
+            <p className="gift-registry-section__note">20 idées de cadeaux avec leurs prix en FCFA. Vous pouvez sélectionner le cadeau qui vous plaît.</p>
             <div className="gift-options">
               {weddingGiftList.map((gift, index) => (
                 <article className={`gift-option${selected?.id === gift.id ? ' gift-option--selected' : ''}`} key={gift.id}>
@@ -81,16 +80,16 @@ const GiftRegistrySection: FC = () => {
               <form className="gift-pledge-form" onSubmit={submitPledge}>
                 <p className="gift-pledge-form__eyebrow">Votre choix</p>
                 <h3>{selected.name} · {formatAmount(selected.amount)} FCFA</h3>
-                <p>Après avoir effectué le dépôt du montant choisi, indiquez votre nom et la référence de transaction. Les mariés pourront ainsi associer votre contribution au cadeau sélectionné.</p>
+                <p>Après avoir réglé le cadeau choisi selon les modalités indiquées, indiquez votre nom et la référence du paiement. Les mariés pourront ainsi savoir quel cadeau vous leur avez offert.</p>
                 <label>
                   Votre nom complet
                   <input required maxLength={120} value={fullName} onChange={(event) => setFullName(event.target.value)} autoComplete="name" />
                 </label>
                 <label>
-                  Référence du transfert
+                  Référence du paiement
                   <input required maxLength={100} value={transactionReference} onChange={(event) => setTransactionReference(event.target.value)} />
                 </label>
-                <button type="submit" disabled={sending}>{sending ? 'Envoi…' : 'Signaler mon dépôt aux mariés'}</button>
+                <button type="submit" disabled={sending}>{sending ? 'Envoi…' : 'Confirmer le cadeau choisi'}</button>
                 {feedback && <p className={`gift-pledge-form__feedback${isSuccess ? ' gift-pledge-form__feedback--success' : ''}`} role="status">{feedback}</p>}
               </form>
             )}

@@ -62,12 +62,12 @@ export default async function handler(
     await transporter.sendMail({
       from: process.env.SMTP_FROM || smtpUser,
       to: notificationEmail,
-      subject: `Cadeau mariage : ${gift.name} · ${amount} FCFA`,
-      text: `Nom : ${guestName}\nCadeau : ${gift.name}\nMontant : ${amount} FCFA\nRéférence de transfert : ${reference}`,
-      html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;padding:24px;color:#43264f"><h2>Nouvelle contribution cadeau</h2><p><strong>Invité(e) :</strong> ${safeName}</p><p><strong>Cadeau choisi :</strong> ${escapeHtml(gift.name)}</p><p><strong>Montant :</strong> ${amount} FCFA</p><p><strong>Référence de transfert :</strong> ${safeReference}</p></div>`,
+      subject: `Cadeau de mariage : ${gift.name} · ${amount} FCFA`,
+      text: `Nom : ${guestName}\nCadeau choisi : ${gift.name}\nPrix : ${amount} FCFA\nRéférence du paiement : ${reference}`,
+      html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;padding:24px;color:#43264f"><h2>Cadeau choisi</h2><p><strong>Invité(e) :</strong> ${safeName}</p><p><strong>Cadeau :</strong> ${escapeHtml(gift.name)}</p><p><strong>Prix :</strong> ${amount} FCFA</p><p><strong>Référence du paiement :</strong> ${safeReference}</p></div>`,
     })
 
-    res.status(200).json({ success: true, message: 'Contribution signalée aux mariés.' })
+    res.status(200).json({ success: true, message: 'Cadeau signalé aux mariés.' })
   } catch (error) {
     console.error('Gift contribution notification failed', error)
     res.status(502).json({ success: false, message: 'La notification n’a pas pu être envoyée. Réessayez ou contactez les mariés.' })
