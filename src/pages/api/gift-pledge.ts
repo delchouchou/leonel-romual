@@ -67,7 +67,7 @@ export default async function handler(
       html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;padding:24px;color:#43264f"><h2>Cadeau choisi</h2><p><strong>Invité(e) :</strong> ${safeName}</p><p><strong>Cadeau :</strong> ${escapeHtml(gift.name)}</p><p><strong>Prix :</strong> ${amount} FCFA</p><p><strong>Référence du paiement :</strong> ${safeReference}</p></div>`,
     })
 
-    res.status(200).json({ success: true, message: 'Cadeau signalé aux mariés.' })
+    res.status(200).json({ success: true, message: 'Les informations du cadeau ont été envoyées à l’adresse prévue pour les mariés.' })
   } catch (error) {
     console.error('Gift contribution notification failed', error)
     res.status(502).json({ success: false, message: 'La notification n’a pas pu être envoyée. Réessayez ou contactez les mariés.' })
