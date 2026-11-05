@@ -24,6 +24,12 @@ const WeddingHero: FC = () => {
           alt={t('heroImageAlt')}
           className="hero__image"
         />
+        <img
+          src={`${basePath}/images/alliances-detourees.png`}
+          alt=""
+          aria-hidden="true"
+          className="hero__rings"
+        />
         <div className="hero__overlay" aria-hidden="true" />
       </div>
 

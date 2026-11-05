@@ -1,13 +1,10 @@
 import React, { FC } from 'react'
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
-
 const StorySection: FC = () => (
   <section
     id="histoire"
     className="history-section"
     aria-labelledby="history-title"
-    style={{ backgroundImage: `url("${basePath}/images/alliances-histoire.png")` }}
   >
     <div className="history-section__inner">
       <div className="history-section__copy">

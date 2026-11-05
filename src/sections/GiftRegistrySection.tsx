@@ -85,7 +85,6 @@ const GiftRegistrySection: FC = () => {
                 <article className={`gift-option${selected?.id === gift.id ? ' gift-option--selected' : ''}`} key={gift.id}>
                   <span className="gift-option__number">{String(index + 1).padStart(2, '0')}</span>
                   <h3>{gift.name}</h3>
-                  <p>{gift.description}</p>
                   <strong>{giftPrice(gift)}</strong>
                   <button type="button" onClick={() => chooseGift(gift)} aria-pressed={selected?.id === gift.id}>
                     {selected?.id === gift.id ? 'Sélectionné' : 'Choisir ce cadeau'}
