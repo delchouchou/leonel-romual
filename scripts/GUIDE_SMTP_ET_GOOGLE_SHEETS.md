@@ -66,7 +66,7 @@ Avant même de brancher le site, vous pouvez tester que le script écrit bien da
     GOOGLE_SHEET_WEBHOOK_URL=https://script.google.com/macros/s/AKfycb.../exec
     ```
 
-Le même webhook enregistre aussi les choix de cadeaux : le script crée automatiquement un onglet **`Cadeaux`** à côté de **`Réservations`**. Chaque choix y ajoute la date, le nom de l’invité, le cadeau et son prix. Pour Vercel, ouvrez **Project → Settings → Environment Variables** et ajoutez `GOOGLE_SHEET_WEBHOOK_URL` avec cette même URL, pour l’environnement **Production**, puis redéployez. Aucune configuration SMTP n’est nécessaire pour les cadeaux.
+Le même webhook enregistre aussi les choix de cadeaux : le script crée automatiquement un onglet **`Cadeaux`** à côté de **`Réservations`**. Chaque choix y ajoute la date, le nom de l’invité, le cadeau, son prix et la référence de transaction. Pour Vercel, ouvrez **Project → Settings → Environment Variables** et ajoutez `GOOGLE_SHEET_WEBHOOK_URL` avec cette même URL, pour l’environnement **Production**, puis redéployez. Aucune configuration SMTP n’est nécessaire pour les cadeaux.
 
 > [!IMPORTANT]
 > Si vous modifiez le code dans Google Apps Script ultérieurement, vous devez toujours faire :

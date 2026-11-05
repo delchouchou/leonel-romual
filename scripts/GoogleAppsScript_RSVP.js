@@ -67,21 +67,25 @@ function doPost(e) {
     // Les déclarations de cadeaux sont stockées dans un onglet séparé.
     if (data.type === "gift") {
       const giftSheet = getTargetSheet(GIFT_SHEET_NAME);
+      const giftHeaders = ["Horodatage", "Nom complet", "Cadeau choisi", "Prix (FCFA)", "Référence de transaction"];
       if (giftSheet.getLastRow() === 0) {
-        giftSheet.appendRow(["Horodatage", "Nom complet", "Cadeau choisi", "Prix (FCFA)"]);
-        const headerRange = giftSheet.getRange(1, 1, 1, 4);
-        headerRange.setFontWeight("bold");
-        headerRange.setBackground("#75458e");
-        headerRange.setFontColor("#ffffff");
-        headerRange.setHorizontalAlignment("center");
-        giftSheet.setFrozenRows(1);
+        giftSheet.appendRow(giftHeaders);
       }
+      // Met à jour aussi l’en-tête d’un onglet créé avec l’ancienne version.
+      const headerRange = giftSheet.getRange(1, 1, 1, giftHeaders.length);
+      headerRange.setValues([giftHeaders]);
+      headerRange.setFontWeight("bold");
+      headerRange.setBackground("#75458e");
+      headerRange.setFontColor("#ffffff");
+      headerRange.setHorizontalAlignment("center");
+      giftSheet.setFrozenRows(1);
 
       giftSheet.appendRow([
         data.timestamp || new Date().toISOString(),
         data.fullName || "",
         data.giftName || "",
-        Number(data.amount) || 0
+        Number(data.amount) || 0,
+        data.transactionReference || ""
       ]);
 
       return ContentService
