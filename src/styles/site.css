@@ -243,19 +243,6 @@ a {
   );
 }
 
-.hero__rings {
-  position: absolute;
-  z-index: 3;
-  top: clamp(38px, 7vh, 74px);
-  left: 50%;
-  width: clamp(118px, 17vw, 218px);
-  height: auto;
-  transform: translateX(-50%);
-  opacity: 0.92;
-  filter: drop-shadow(0 5px 14px rgba(28, 15, 31, 0.28));
-  pointer-events: none;
-}
-
 .hero__content {
   position: relative;
   z-index: 1;
@@ -2309,7 +2296,7 @@ a {
 /* Histoire, localisation, cadeaux et contacts */
 .history-section { position: relative; overflow: hidden; padding: clamp(72px,10vw,128px) clamp(20px,5vw,48px); background: linear-gradient(140deg,#f8f0fa,#fff8fc 62%,#f0e8f7); }
 .history-section__inner { position: relative; width: min(100%,1120px); margin: 0 auto; }
-.history-section__copy { position: relative; z-index: 1; max-width: 790px; padding: clamp(24px,4vw,48px); background: rgba(255,251,253,.76); border: 1px solid rgba(137,80,160,.22); box-shadow: 0 22px 70px rgba(74,36,90,.1); }
+.history-section__copy { position: relative; z-index: 1; max-width: 790px; padding: clamp(24px,4vw,48px); background: rgba(255,251,253,.58); border: 1px solid rgba(137,80,160,.22); box-shadow: 0 22px 70px rgba(74,36,90,.1); }
 .history-section__eyebrow,.locations-section__eyebrow,.gift-registry-section__eyebrow,.contacts-section__eyebrow { margin: 0 0 16px; color: #a44886; font: 9px "DM Mono",monospace; letter-spacing: .18em; text-transform: uppercase; }
 .history-section h2,.locations-section h2,.gift-registry-section h2,.contacts-section h2 { margin: 0 0 20px; color: #4d2b64; font: 500 clamp(36px,5vw,58px)/.98 "Cormorant Garamond",Georgia,serif; }
 .history-section h2 em { color: #a24886; font-weight: 400; }
@@ -2412,13 +2399,34 @@ a {
 .checkin-result p { margin: 5px 0 0; color: #62516a; }
 
 @media (max-width:760px) {
-  .history-section__copy { padding: 26px 22px; background: rgba(255,251,253,.82); }
+  .history-section__copy { padding: 26px 22px; background: rgba(255,251,253,.68); }
   .locations-grid,.gift-options,.contacts-grid { grid-template-columns: 1fr; }
   .gift-registry-content .gift-options { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .gift-option { min-height: 0; }
   .demo-guest-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .checkin-tools { grid-template-columns: 1fr; }
   .checkin-manual-form { grid-template-columns: 1fr; }
+}
+
+/* Les alliances restent en filigrane derrière toutes les sections après l’accueil. */
+.site main > section:not(#home) {
+  position: relative;
+  isolation: isolate;
+}
+.site main > section:not(#home)::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: url("/images/alliances-detourees.png") center center / clamp(180px, 34vw, 420px) auto no-repeat;
+  opacity: .18;
+  pointer-events: none;
+}
+@media (max-width: 760px) {
+  .site main > section:not(#home)::before {
+    background-size: min(70vw, 300px) auto;
+    opacity: .15;
+  }
 }
 @media (max-width:480px) {
   .gift-registry-content .gift-options { grid-template-columns: 1fr; }
