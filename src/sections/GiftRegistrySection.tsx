@@ -48,7 +48,7 @@ const GiftRegistrySection: FC = () => {
       })
       const result = await response.json()
       if (!response.ok) throw new Error(result.message || 'La déclaration du cadeau a échoué.')
-      setFeedback('Merci ! Votre choix et la référence ont été transmis aux mariés. Ils vérifieront le transfert dans leur historique Mobile Money.')
+      setFeedback('Merci ! Votre choix et la référence ont été transmis aux mariés.')
       setIsSuccess(true)
       setFullName('')
       setCustomAmount('')
@@ -106,7 +106,7 @@ const GiftRegistrySection: FC = () => {
                   ? 'Choisissez le montant de votre cadeau dans la fourchette indiquée, effectuez le dépôt, puis saisissez votre nom et la référence de la transaction.'
                   : selected.amount === null
                     ? 'Choisissez le montant de votre dépôt, effectuez le transfert, puis saisissez votre nom et la référence de la transaction.'
-                    : 'Effectuez le dépôt du montant indiqué, puis saisissez votre nom et la référence de la transaction.'} Les mariés compareront cette référence avec leur historique Mobile Money.</p>
+                  : 'Effectuez le dépôt du montant indiqué, puis saisissez votre nom et la référence de la transaction.'}</p>
                 {(selected.amount === null || selected.minAmount !== undefined) && (
                   <label>
                     Montant de votre dépôt (FCFA)
