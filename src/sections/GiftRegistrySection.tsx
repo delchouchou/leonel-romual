@@ -8,6 +8,9 @@ const giftPrice = (gift: WeddingGift): string => {
   }
   return gift.amount === null ? 'Montant au choix' : `${formatAmount(gift.amount)} FCFA`
 }
+const giftImagePosition = (imageIndex: number): React.CSSProperties => ({
+  backgroundPosition: `${(imageIndex % 5) * 25}% ${Math.floor(imageIndex / 5) * 25}%`,
+})
 
 const GiftRegistrySection: FC = () => {
   const [showList, setShowList] = useState(false)
@@ -84,6 +87,7 @@ const GiftRegistrySection: FC = () => {
               {weddingGiftList.map((gift, index) => (
                 <article className={`gift-option${selected?.id === gift.id ? ' gift-option--selected' : ''}`} key={gift.id}>
                   <span className="gift-option__number">{String(index + 1).padStart(2, '0')}</span>
+                  <div className="gift-option__image" style={giftImagePosition(gift.imageIndex)} aria-hidden="true" />
                   <h3>{gift.name}</h3>
                   <strong>{giftPrice(gift)}</strong>
                   <button type="button" onClick={() => chooseGift(gift)} aria-pressed={selected?.id === gift.id}>
