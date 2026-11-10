@@ -8,10 +8,6 @@ const giftPrice = (gift: WeddingGift): string => {
   }
   return gift.amount === null ? 'Montant au choix' : `${formatAmount(gift.amount)} FCFA`
 }
-const giftImagePosition = (imageIndex: number): React.CSSProperties => ({
-  backgroundPosition: `${(imageIndex % 6) * 20}% ${Math.floor(imageIndex / 6) * 25}%`,
-})
-
 const GiftRegistrySection: FC = () => {
   const [showList, setShowList] = useState(false)
   const [selected, setSelected] = useState<WeddingGift | null>(null)
@@ -84,10 +80,14 @@ const GiftRegistrySection: FC = () => {
           <div id="gift-options-list" className="gift-registry-content">
             <p className="gift-registry-section__note">{weddingGiftList.length} idées de cadeaux avec leurs prix en FCFA. Vous pouvez sélectionner le cadeau qui vous plaît.</p>
             <div className="gift-options">
-              {weddingGiftList.map((gift, index) => (
+              {weddingGiftList.map((gift) => (
                 <article className={`gift-option${selected?.id === gift.id ? ' gift-option--selected' : ''}`} key={gift.id}>
-                  <span className="gift-option__number">{String(index + 1).padStart(2, '0')}</span>
-                  <div className="gift-option__image" style={giftImagePosition(gift.imageIndex)} aria-hidden="true" />
+                  <img
+                    className="gift-option__image"
+                    src={`/images/gifts/gift-${String(gift.imageIndex).padStart(2, '0')}.webp`}
+                    alt=""
+                    aria-hidden="true"
+                  />
                   <h3>{gift.name}</h3>
                   <strong>{giftPrice(gift)}</strong>
                   <button type="button" onClick={() => chooseGift(gift)} aria-pressed={selected?.id === gift.id}>
