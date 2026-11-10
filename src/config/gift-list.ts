@@ -9,8 +9,10 @@ export type WeddingGift = {
 
 // Cadeaux à prix fixe ou à fourchette, selon le choix proposé aux invités.
 export const weddingGiftList: WeddingGift[] = [
-  { id: 'dish-towels', name: 'Lot de torchons de cuisine', imageIndex: 0, amount: 2000 },
-  { id: 'spatula-set', name: 'Lot de spatules et ustensiles', imageIndex: 1, amount: 3000 },
+  { id: 'dish-towels-8', name: 'Lot de 8 torchons de cuisine', imageIndex: 0, amount: 5000 },
+  { id: 'dish-towels-10', name: 'Lot de 10 torchons de cuisine', imageIndex: 0, amount: 7000 },
+  { id: 'spatula-set-18', name: 'Set de 18 pièces : spatules, cuillères et couteaux', imageIndex: 1, amount: 22500 },
+  { id: 'spatula-set-30', name: 'Set de 30 pièces : spatules, cuillères et couteaux', imageIndex: 1, amount: 30000 },
   { id: 'storage-boxes', name: 'Boîtes de conservation', imageIndex: 2, amount: 4000 },
   { id: 'kitchen-mat', name: 'Tapis de cuisine', imageIndex: 3, amount: 5000 },
   { id: 'coffee-set', name: 'Service à café', imageIndex: 4, amount: 5000 },
@@ -27,8 +29,8 @@ export const weddingGiftList: WeddingGift[] = [
   { id: 'natural-juice-extractor', name: 'Extracteur de jus naturel', imageIndex: 11, amount: 20000 },
   { id: 'curtains', name: 'Jolis rideaux', imageIndex: 12, amount: null, minAmount: 20000, maxAmount: 25000 },
   { id: 'ironing-board', name: 'Table à repasser', imageIndex: 13, amount: 25000 },
-  { id: 'plates-set', name: 'Un ensemble d’assiettes', imageIndex: 14, amount: 15000 },
-  { id: 'two-plates-sets', name: 'Deux ensembles d’assiettes', imageIndex: 14, amount: 30000 },
+  { id: 'plates-set', name: 'Un ensemble d’assiettes creuses (coupelles)', imageIndex: 14, amount: 15000 },
+  { id: 'two-plates-sets', name: 'Deux ensembles d’assiettes creuses (coupelles)', imageIndex: 14, amount: 30000 },
   { id: 'salad-bowl', name: 'Saladier', imageIndex: 15, amount: null, minAmount: 4500, maxAmount: 7500 },
   { id: 'pots', name: 'Jeu de marmites', imageIndex: 16, amount: null, minAmount: 35000, maxAmount: 45000 },
   { id: 'dishes-cutlery-dozen', name: 'Une douzaine de plats avec fourchettes, cuillères et couteaux', imageIndex: 17, amount: 20000 },
@@ -40,4 +42,6 @@ export const weddingGiftList: WeddingGift[] = [
   { id: 'cookstove', name: 'Cuisinière', imageIndex: 22, amount: null, minAmount: 80000, maxAmount: 95000 },
   { id: 'honeymoon-kribi', name: 'Voyage de noces à Kribi', imageIndex: 23, amount: null, minAmount: 100000, maxAmount: 115000 },
   { id: 'om-choice', name: 'Dépôt OM · montant au choix', imageIndex: 24, amount: null },
+  { id: 'table-runners', name: 'Set de chemins de table (4 pièces)', imageIndex: 25, amount: null, minAmount: 8000, maxAmount: 15000 },
+  { id: 'electric-chopper', name: 'Hachoir électrique multifonction', imageIndex: 26, amount: null, minAmount: 20000, maxAmount: 35000 },
 ]

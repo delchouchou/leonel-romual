@@ -9,7 +9,7 @@ const giftPrice = (gift: WeddingGift): string => {
   return gift.amount === null ? 'Montant au choix' : `${formatAmount(gift.amount)} FCFA`
 }
 const giftImagePosition = (imageIndex: number): React.CSSProperties => ({
-  backgroundPosition: `${(imageIndex % 5) * 25}% ${Math.floor(imageIndex / 5) * 25}%`,
+  backgroundPosition: `${(imageIndex % 6) * 20}% ${Math.floor(imageIndex / 6) * 25}%`,
 })
 
 const GiftRegistrySection: FC = () => {
