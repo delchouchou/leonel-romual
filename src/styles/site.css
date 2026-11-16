@@ -2284,13 +2284,15 @@ a {
   .dress-code-theme { font-size: 58px; }
   .wedding-palette { gap: 11px 8px; }
 }
+/* Impression isolée : seul le clone placé dans #print-root est imprimé (voir src/utils/print.ts) */
+#print-root { display: none; }
 @media print {
   @page { size: A4 portrait; margin: 12mm; }
-  body * { visibility: hidden !important; }
-  .wedding-ticket,.wedding-ticket * { visibility: visible !important; }
-  .wedding-ticket-stage { position: absolute; inset: 0; display: block; margin: 0; }
-  .wedding-ticket { width: 100%; max-width: 170mm; min-height: 240mm; margin: 0 auto; transform: none !important; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-  .wedding-ticket-actions { display: none !important; }
+  html.print-isolate, html.print-isolate body { height: auto !important; min-height: 0 !important; overflow: visible !important; background: #fff !important; }
+  html.print-isolate body > *:not(#print-root) { display: none !important; }
+  html.print-isolate #print-root { display: block !important; }
+  #print-root > * { break-inside: avoid; page-break-inside: avoid; }
+  #print-root .wedding-ticket { width: 100%; max-width: 170mm; min-height: 0; max-height: 270mm; margin: 0 auto; overflow: hidden; transform: none !important; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
 }
 
 /* Histoire, localisation, cadeaux et contacts */
@@ -2434,9 +2436,7 @@ a {
   .demo-guest-grid { grid-template-columns: 1fr; }
 }
 @media print {
-  body * { visibility: hidden !important; }
-  .demo-ticket-card,.demo-ticket-card * { visibility: visible !important; }
-  .demo-ticket-card { position: absolute; top: 0; left: 0; width: 100%; max-width: none; min-height: 0; margin: 0; border: 0; box-shadow: none; }
-  .demo-ticket-card__download,.demo-ticket-card > button { display: none !important; }
-  .demo-ticket-card__staff-link,.my-ticket-card__reset { display: none !important; }
+  #print-root .demo-ticket-card { width: 100%; max-width: none; min-height: 0; margin: 0 auto; border: 0; box-shadow: none; }
+  #print-root .demo-ticket-card__download,#print-root .demo-ticket-card > button { display: none !important; }
+  #print-root .demo-ticket-card__staff-link,#print-root .my-ticket-card__reset { display: none !important; }
 }

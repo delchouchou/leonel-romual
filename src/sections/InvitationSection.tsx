@@ -1,8 +1,9 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useRef, useState } from 'react'
 import ScrollReveal from '@/components/ScrollReveal'
 import { useLocale } from '@/context/locale-context'
 import weddingConfig from '@/config/wedding.config'
 import { weddingSchedule } from '@/config/wedding-schedule'
+import { printElement } from '@/utils/print'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -86,6 +87,7 @@ const WeddingInvitationCard: FC = () => {
 
 const InvitationSection: FC = () => {
   const { t } = useLocale()
+  const stageRef = useRef<HTMLDivElement>(null)
 
   return (
     <section id="invitation" className="section section--invitation" aria-labelledby="invitation-title">
@@ -94,11 +96,11 @@ const InvitationSection: FC = () => {
           <p className="section__eyebrow">01 / {t('navInvitation')}</p>
           <h2 id="invitation-title" className="section__title">{t('invitationTitle')}</h2>
         </ScrollReveal>
-        <div className="wedding-ticket-stage"><WeddingInvitationCard /></div>
+        <div className="wedding-ticket-stage" ref={stageRef}><WeddingInvitationCard /></div>
         <p className="wedding-ticket-model-note">Ce faire-part est un aperçu téléchargeable. Pour entrer le jour du mariage, chaque invité devra présenter son billet nominatif avec son QR code unique.</p>
         <div className="wedding-ticket-actions">
           <a href="/mon-billet" className="wedding-ticket__print">Obtenir mon billet nominatif avec mon QR</a>
-          <button type="button" onClick={() => window.print()} className="wedding-ticket__print">Télécharger le faire-part (PDF)</button>
+          <button type="button" onClick={() => printElement(stageRef.current?.querySelector<HTMLElement>('.wedding-ticket') ?? null, 'Faire-part Leonelle & Romuald')} className="wedding-ticket__print">Télécharger le faire-part (PDF)</button>
           <p className="wedding-ticket-download-help">Dans la fenêtre qui s’ouvre, choisissez « Enregistrer au format PDF ».</p>
         </div>
       </div>

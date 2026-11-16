@@ -1,5 +1,6 @@
-import React, { FC, FormEvent, useState } from 'react'
+import React, { FC, FormEvent, useRef, useState } from 'react'
 import QRCode from '@/components/QRCode'
+import { printElement } from '@/utils/print'
 
 type GuestTicket = { guest_name: string; party_size: number; token: string }
 
@@ -9,6 +10,7 @@ const MyTicketPage: FC = () => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [origin, setOrigin] = useState('')
+  const cardRef = useRef<HTMLElement>(null)
 
   React.useEffect(() => setOrigin(window.location.origin), [])
 
@@ -39,7 +41,7 @@ const MyTicketPage: FC = () => {
 
   return (
     <main className="demo-ticket-page">
-      <section className="demo-ticket-card my-ticket-card">
+      <section className="demo-ticket-card my-ticket-card" ref={cardRef}>
         <p className="demo-tickets-page__badge">Invitation nominative</p>
         <p className="demo-ticket-card__theme">Jardin de lilas</p>
         <h1>Leonelle <span>&amp;</span> Romuald</h1>
@@ -60,7 +62,7 @@ const MyTicketPage: FC = () => {
             <p>Jeudi 17 &amp; vendredi 18 décembre 2026<br />Nkongsamba, Cameroun</p>
             <p className="demo-ticket-card__code">{ticket.party_size} place{ticket.party_size > 1 ? 's' : ''} · Billet personnel</p>
             {ticketUrl && <QRCode value={ticketUrl} title={`QR code d’entrée de ${ticket.guest_name}`} />}
-            <button className="demo-ticket-card__download" type="button" onClick={() => window.print()}>Télécharger mon billet (PDF)</button>
+            <button className="demo-ticket-card__download" type="button" onClick={() => ticket && printElement(cardRef.current, `Billet ${ticket.guest_name} - Leonelle & Romuald`)}>Télécharger mon billet (PDF)</button>
             <p className="demo-ticket-card__warning">Présentez ce QR code à l’équipe d’accueil. Il sera validé une seule fois à l’entrée.</p>
             <button type="button" className="my-ticket-card__reset" onClick={() => setTicket(null)}>Rechercher un autre nom</button>
           </>

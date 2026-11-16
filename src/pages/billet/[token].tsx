@@ -1,7 +1,8 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import QRCode from '@/components/QRCode'
+import { printElement } from '@/utils/print'
 
 type GuestTicket = { guest_name: string; party_size: number; token: string }
 
@@ -11,6 +12,7 @@ const GuestTicketPage: FC = () => {
   const [error, setError] = useState('')
   const [origin, setOrigin] = useState('')
   const [loading, setLoading] = useState(true)
+  const cardRef = useRef<HTMLElement>(null)
   const token = typeof router.query.token === 'string' ? router.query.token : ''
 
   useEffect(() => {
@@ -34,7 +36,7 @@ const GuestTicketPage: FC = () => {
 
   return (
     <main className="demo-ticket-page">
-      <article className="demo-ticket-card">
+      <article className="demo-ticket-card" ref={cardRef}>
         <p className="demo-tickets-page__badge">Billet nominatif</p>
         {loading ? <p>Chargement du billet…</p> : error || !ticket ? (
           <><h1>Billet introuvable</h1><p>{error || 'Ce lien ne correspond à aucun billet.'}</p><Link href="/mon-billet"><a>Retrouver mon billet avec mon nom</a></Link></>
@@ -46,7 +48,7 @@ const GuestTicketPage: FC = () => {
             <p>Jeudi 17 &amp; vendredi 18 décembre 2026<br />Nkongsamba, Cameroun</p>
             <p className="demo-ticket-card__code">{ticket.party_size} place{ticket.party_size > 1 ? 's' : ''} · Billet personnel</p>
             {ticketUrl && <QRCode value={ticketUrl} title={`QR code d’entrée de ${ticket.guest_name}`} />}
-            <button className="demo-ticket-card__download" type="button" onClick={() => window.print()}>Télécharger mon billet (PDF)</button>
+            <button className="demo-ticket-card__download" type="button" onClick={() => ticket && printElement(cardRef.current, `Billet ${ticket.guest_name} - Leonelle & Romuald`)}>Télécharger mon billet (PDF)</button>
             <p className="demo-ticket-card__warning">Présentez ce code à l’équipe d’accueil. Le nom sera vérifié puis coché sur la feuille d’entrée.</p>
             <Link href={`/controle-acces?code=${encodeURIComponent(ticket.token)}`}><a className="demo-ticket-card__staff-link">Équipe d’accueil : vérifier ce billet</a></Link>
           </>
