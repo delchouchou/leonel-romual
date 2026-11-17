@@ -8,11 +8,11 @@ const weddingConfig: WeddingConfigType = {
     date: {
         date: '2026-12-18',
         time: '09:00',
-        ceremonyTime: '11h00',
+        ceremonyTime: '14h00',
         receptionTime: '19h00'
     },
     location: {
-        title: 'EEC Grand Temple de Nkongsamba',
+        title: 'Paroisse du Grand Temple de Nkongsamba',
         address: 'Nkongsamba, Cameroun',
         link: 'https://www.google.com/maps/search/?api=1&query=EEC+Grand+Temple+Nkongsamba+Cameroon',
         latLng: ''
