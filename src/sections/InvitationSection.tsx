@@ -64,7 +64,7 @@ const WeddingInvitationCard: FC = () => {
             <div className="wedding-ticket__day-heading"><span>01</span><div><small>JEUDI 17 DÉCEMBRE</small><h4>La dot</h4></div></div>
             {thursdayEvents.map((event) => (
               <div className="wedding-ticket__line wedding-ticket__line--single" key={event.title}>
-                <time>{event.time}</time><div><strong>{event.title}</strong><small>Nkongsamba</small></div>
+                <time>{event.time}</time><div><strong>{event.title}</strong><small>{event.place}</small></div>
               </div>
             ))}
           </section>
