@@ -7,7 +7,7 @@ Ce guide vous explique pas à pas comment activer l'envoi d'emails par **SMTP** 
 ## 1. 📧 Configuration de l'envoi d'emails (SMTP)
 
 Le système utilise **Nodemailer** pour envoyer :
-1. Un email d'alerte instantané aux mariés (`delchere.dontsa@aims-cameroon.org`) avec tous les détails de l'invité.
+1. Un email d'alerte instantané aux mariés (`email-des-maries@exemple.com`) avec tous les détails de l'invité.
 2. Un email de confirmation somptueux à l'invité avec le lieu, la date et le lien pour l'ajouter à son calendrier Google.
 
 ### Configuration avec Gmail (Recommandé) :
@@ -24,7 +24,7 @@ Le système utilise **Nodemailer** pour envoyer :
    SMTP_USER=votre-adresse@gmail.com
    SMTP_PASS=abcdefghijklmnop
    SMTP_FROM="Mariage Leonelle & Romuald <votre-adresse@gmail.com>"
-   ADMIN_NOTIFICATION_EMAIL=delchere.dontsa@aims-cameroon.org
+   ADMIN_NOTIFICATION_EMAIL=email-des-maries@exemple.com
    ```
 
 ---

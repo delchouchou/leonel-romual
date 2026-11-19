@@ -15,7 +15,7 @@ const GIFT_SHEET_NAME = "Cadeaux";
 const SPREADSHEET_ID = "1KbrbPr_ps2pWnyauA-K06ujxqOaJAfOYX8SHVMWx43c";
 
 // Email des mariés pour recevoir les alertes instantanées
-const ADMIN_EMAIL = "delchere.dontsa@aims-cameroon.org";
+const ADMIN_EMAIL = "email-des-maries@exemple.com";
 
 
 /**

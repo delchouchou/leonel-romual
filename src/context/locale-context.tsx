@@ -55,22 +55,6 @@ const translations: Record<Locale, Record<string, string>> = {
     storyBridgeLabel: 'Le grand jour',
     storyReadMore: 'Lire la suite',
     storyReadLess: 'Replier',
-    storyIntro:
-      'Parfois, la vie a une drôle de façon de rapprocher deux êtres. On pense simplement entamer un nouveau chapitre, puis on réalise plus tard que l’on venait de croiser la personne qui allait changer toute notre histoire.',
-    storyChapter01:
-      'En 2022, nos chemins se sont croisés à AIMS Cameroun, au milieu de la recherche, des sciences et des idées, sans qu’aucun signe ne laisse deviner que nous étions au tout début d’une grande aventure. Nous nous sommes rencontrés et nous parlions de travail, de recherche, de projets. Des sujets très sérieux. Du moins, c’est ce que nous croyions.',
-    storyChapter02:
-      'Après cette étape à AIMS, nous avons continué à échanger. Puis les conversations sont devenues de plus en plus longues, les appels de plus en plus fréquents. Les intérêts ont naturellement changé. Nous sommes passés de « Comment va la recherche ? » à parler de famille, de rêves, de foi, d’ambitions et de tout ce qu’on avait de plus profond.',
-    storyChapter03: `Quelque part en chemin, quelque chose a changé. Le respect est devenu confiance, la confiance est devenue amitié, et l’amitié s’est transformée en quelque chose de plus profond. Puis est venue cette question que ni l’un ni l’autre ne pouvait plus vraiment éviter : « Attends… est-ce que tout cela est en train de devenir quelque chose de plus ? »`,
-    storyChapter04b:
-      'Mais ce qu’il y a de beau avec l’amour, c’est qu’il ne suit pas toujours l’équation la plus évidente. Plus nous apprenions à nous connaître, plus nous découvrions que nous partagions l’essentiel : la famille, la foi, le respect, le sens des valeurs, l’ambition et ce désir sincère de nous voir grandir l’un à côté de l’autre.',
-    storyChapter04c: 'L’équation commençait enfin à prendre tout son sens.',
-    storyChapter05: `Puis est venu le jour où nous nous sommes enfin rencontrés. Et, d’une certaine façon, cela ressemblait moins à un commencement qu’au fait de donner un visage, un sourire et une véritable étreinte à ce qui avait déjà grandi entre nous. Ce moment a tout changé. Il ne s’agissait plus seulement de se demander ce que nous ressentions ; il s’agissait de savoir ce que nous voulions en faire.`,
-    storyChapter06: `Et nous nous sommes choisis.
-Nous avons choisi de saisir cette magnifique et inattendue connexion pour en faire quelque chose de réel. Quelque chose d’intentionnel. Quelque chose qui mérite d’être bâti, protégé et cultivé ensemble. Notre histoire n’a peut-être pas suivi l’équation la plus simple. Il y avait des pays différents, des cultures différentes, la distance, le timing et tant d’inconnues. Mais à travers tout cela, une évidence n’a cessé de s’imposer : nous.`,
-    storyFinalVariable: `Nous voici donc aujourd’hui, avec une histoire née de façon totalement inattendue et qui nous a menés là où nous n’aurions jamais pu l’imaginer.`,
-    storyClosing: `Et parce que chaque belle histoire mérite de garder quelques surprises, nous réservons les prochains chapitres pour vous. Vous devrez patienter encore un tout petit peu, car le prochain chapitre s’écrira le jour de notre mariage.
-Et cette fois, nous allons l’écrire ensemble. ❤️`,
     wedding: 'Le grand jour',
     weddingText: 'Rendez-vous les jeudi 17 et vendredi 18 décembre 2026 à Nkongsamba pour célébrer notre union.',
     weddingCountdownTitle: 'Le grand jour approche',
@@ -107,7 +91,6 @@ Et cette fois, nous allons l’écrire ensemble. ❤️`,
     giftsTitle: 'Cadeaux',
     contactTitle: 'Contact',
     rsvp: 'RSVP',
-    rsvpText: 'Cela nous ferait grand plaisir d’obtenir votre réponse au plus tard fin octobre, afin de nous aider à préparer au mieux cette célébration.',
     invitationEyebrow: "02 / L'Invitation",
     invitationTitle: "Notre invitation",
     invitationLead: 'Une invitation en trois dimensions pour célébrer avec nous à Nkongsamba.',
@@ -205,26 +188,10 @@ Et cette fois, nous allons l’écrire ensemble. ❤️`,
     storyBridgeLabel: 'The wedding day',
     storyReadMore: 'Read more',
     storyReadLess: 'Show less',
-    storyIntro:
-      'Sometimes, life has a funny way of introducing two people. You think you are simply starting a new chapter, and only later realise that you were actually meeting someone who would change the whole story.',
-    storyChapter01:
-      'In 2022, our paths crossed at AIMS Cameroon, surrounded by research, science, ideas, and at least at the time, absolutely no obvious sign that we were sitting at the beginning of something much bigger. We met and started talking about work, research, and projects. Very serious things. Or so we thought.',
-    storyChapter02:
-      'After that chapter at AIMS, the conversations continued. Then they became longer. The calls became more frequent. And somehow, the conversations that once began with “How is the research going?” started wandering into everything else, life, family, dreams, faith, ambitions, and all the little things that make us who we are.',
-    storyChapter03: `Somewhere along the way, something changed. Respect became trust, trust became friendship, and friendship quietly became something deeper. Then came the question neither of us could quite ignore: “Wait… is this becoming something more?”`,
     storyChapter04a:
       'There was, of course, the small matter of distance. And different backgrounds. And different cultures. And all the practical reasons why perhaps this should have been complicated.',
-    storyChapter04b:
-      'But the funny thing about love is that it does not always follow the most obvious equation. The more we got to know each other, the more we discovered that we shared the things that mattered most: family, faith, respect, purpose, ambition, and the desire to see each other grow.',
-    storyChapter04c: 'Slowly, the equation was beginning to make sense.',
-    storyChapter05: `Then came the moment we finally met in person. And somehow, it felt less like the beginning and more like putting a face, a smile and a real embrace to something that had already been growing between us. That moment changed something. It was no longer just about asking what we felt; it became about asking what we wanted to do with it.`,
-    storyChapter06: `And we chose each other.
-We chose to take this beautiful, unexpected connection and turn it into something real. Something intentional. Something worth building, protecting and growing together. Our story may not have followed the simplest equation. There were different countries, different cultures, distance, timing, and plenty of unknown variables. But somehow, through it all, one thing kept becoming clearer: us.`,
     storyEpilogue:
       'And perhaps that is the most beautiful part of the story, not that everything was easy or perfectly predictable, but that, step by step, we kept finding our way back to each other. We are still learning, still laughing, still dreaming, and still choosing each other.',
-    storyFinalVariable: `So here we are, with a story that began quite unexpectedly and has brought us to a place we could not have predicted when our paths first crossed in 2022.`,
-    storyClosing: `And because every beautiful story deserves a few surprises, we are keeping some of the next chapters for you. You will have to wait just a little longer, because the next chapter will be written on our wedding day.
-And this time, we get to write it together. ❤️`,
     wedding: 'The wedding day',
     weddingText: 'Join us in Nkongsamba on Thursday, December 17 and Friday, December 18, 2026 to celebrate our union.',
     weddingCountdownTitle: 'The big day is approaching',
@@ -261,7 +228,6 @@ And this time, we get to write it together. ❤️`,
     giftsTitle: 'Gifts',
     contactTitle: 'Contact',
     rsvp: 'RSVP',
-    rsvpText: 'We would be delighted to receive your response by late October at the latest, to help us best prepare for this celebration.',
     invitationEyebrow: "02 / The Invitation",
     invitationTitle: 'Our invitation',
     invitationLead: 'A three-dimensional invitation to celebrate with us in Nkongsamba.',
