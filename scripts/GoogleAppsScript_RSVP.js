@@ -1,6 +1,6 @@
 /**
  * =========================================================================
- * GOOGLE APPS SCRIPT POUR LES RÉSERVATIONS DU MARIAGE DELCHERE & IHECHUKWU
+ * GOOGLE APPS SCRIPT POUR LES RÉSERVATIONS DU MARIAGE LEONELLE & ROMUALD
  * =========================================================================
  * 
  * 1. PARAMÈTRES DE VOTRE GOOGLE SHEET :
@@ -141,7 +141,7 @@ function doPost(e) {
       const htmlBody = `
         <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; border: 1px solid #c49a52; border-radius: 10px; overflow: hidden;">
           <div style="background: #3f5248; color: #f7f2e9; padding: 20px; text-align: center;">
-            <p style="letter-spacing: 2px; font-size: 12px; margin: 0; color: #c49a52;">✦ DELCHERE & IHECHUKWU ✦</p>
+            <p style="letter-spacing: 2px; font-size: 12px; margin: 0; color: #c49a52;">✦ LEONELLE & ROMUALD ✦</p>
             <h2 style="margin: 8px 0; font-size: 22px;">Nouvelle Réservation Reçue</h2>
           </div>
           <div style="padding: 24px; color: #1a2621; line-height: 1.6;">
@@ -205,11 +205,11 @@ function testerEnregistrement() {
       contents: JSON.stringify({
         fullName: "Test Invité",
         email: "test@example.com",
-        phone: "+228 90 00 00 00",
+        phone: "+237 6 99 00 00 00",
         attendance: "Présent(e)",
         hasPlusOne: false,
         guestName: "",
-        dietaryOrMessage: "💍 Tous nos vœux de bonheur pour Delchere & Ihechukwu !"
+        dietaryOrMessage: "💍 Tous nos vœux de bonheur pour Leonelle & Romuald !"
       })
     }
   };

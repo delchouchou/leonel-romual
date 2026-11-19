@@ -23,7 +23,7 @@ Le système utilise **Nodemailer** pour envoyer :
    SMTP_SECURE=false
    SMTP_USER=votre-adresse@gmail.com
    SMTP_PASS=abcdefghijklmnop
-   SMTP_FROM="Mariage Delchere & Ihechukwu <votre-adresse@gmail.com>"
+   SMTP_FROM="Mariage Leonelle & Romuald <votre-adresse@gmail.com>"
    ADMIN_NOTIFICATION_EMAIL=delchere.dontsa@aims-cameroon.org
    ```
 
@@ -35,7 +35,7 @@ Un script complet et amélioré est inclus dans [`scripts/GoogleAppsScript_RSVP.
 
 ### Étapes d'installation pas à pas :
 
-1. Ouvrez Google Sheets et créez votre feuille de calcul (ex: **"Réservations Mariage Delchere & Ihechukwu"**).
+1. Ouvrez Google Sheets et créez votre feuille de calcul (ex: **"Réservations Mariage Leonelle & Romuald"**).
    - Nommez votre premier onglet en bas **`Réservations`** (ou laissez le nom par défaut, le script gère les deux automatiquement !).
 2. Dans le menu en haut de votre Google Sheet, cliquez sur **Extensions** > **Apps Script**.
 3. Supprimez tout code existant dans la fenêtre et collez l'intégralité du code de [`scripts/GoogleAppsScript_RSVP.js`](./GoogleAppsScript_RSVP.js).

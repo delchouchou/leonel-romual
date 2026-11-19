@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import nodemailer from 'nodemailer'
 import axios from 'axios'
-import weddingConfig from '@/config/wedding.config'
 import adminConfig from '@/config/admin.config'
 import { buildGoogleCalendarUrl } from '@/utils/calendar'
 
@@ -72,7 +71,7 @@ export default async function handler(
   const smtpUser = process.env.SMTP_USER
   const smtpPass = process.env.SMTP_PASS
   const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL || adminConfig.email || 'delchere.dontsa@aims-cameroon.org'
-  const smtpFrom = process.env.SMTP_FROM || `"Mariage Delchere & Ihechukwu" <${smtpUser || 'no-reply@wedding.com'}>`
+  const smtpFrom = process.env.SMTP_FROM || `"Mariage Leonelle & Romuald" <${smtpUser || 'no-reply@wedding.com'}>`
 
   if (smtpUser && smtpPass) {
     try {
@@ -90,9 +89,9 @@ export default async function handler(
       const adminHtml = `
         <div style="font-family: 'Georgia', serif; max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #c49a52; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
           <div style="background: #3f5248; color: #f7f2e9; padding: 24px; text-align: center;">
-            <p style="font-family: monospace; letter-spacing: 3px; font-size: 13px; margin: 0; color: #c49a52;">✦ D × I ✦</p>
+            <p style="font-family: monospace; letter-spacing: 3px; font-size: 13px; margin: 0; color: #c49a52;">✦ L × R ✦</p>
             <h1 style="margin: 8px 0; font-size: 24px; font-weight: normal;">Nouvelle Réservation Reçue</h1>
-            <p style="margin: 0; font-size: 14px; opacity: 0.85;">Mariage de Delchere & Ihechukwu — 9 Janvier 2027</p>
+            <p style="margin: 0; font-size: 14px; opacity: 0.85;">Mariage de Leonelle & Romuald — 17 & 18 décembre 2026</p>
           </div>
           <div style="padding: 28px 24px; color: #1a2621; line-height: 1.6;">
             <div style="background: #fbf9f4; border: 1px solid #e3d5be; border-radius: 8px; padding: 18px; margin-bottom: 20px;">
@@ -135,7 +134,7 @@ export default async function handler(
               </table>
             </div>
             <p style="text-align: center; margin: 20px 0 0; font-size: 13px; color: #888;">
-              Notification automatique du site de mariage <a href="https://delchere.github.io/wedding-invitation" style="color: #c49a52;">Delchere & Ihechukwu</a>
+              Notification automatique du site de mariage Leonelle & Romuald
             </p>
           </div>
         </div>
@@ -153,8 +152,8 @@ export default async function handler(
         const guestHtml = `
           <div style="font-family: 'Georgia', serif; max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #c49a52; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
             <div style="background: #3f5248; color: #f7f2e9; padding: 32px 24px; text-align: center;">
-              <p style="font-family: monospace; letter-spacing: 4px; font-size: 12px; margin: 0; color: #c49a52;">✦ DELCHERE & IHECHUKWU ✦</p>
-              <h1 style="margin: 12px 0 6px; font-size: 26px; font-weight: normal;">Thèse de l'amour</h1>
+              <p style="font-family: monospace; letter-spacing: 4px; font-size: 12px; margin: 0; color: #c49a52;">✦ LEONELLE & ROMUALD ✦</p>
+              <h1 style="margin: 12px 0 6px; font-size: 26px; font-weight: normal;">Jardin de lilas</h1>
               <p style="margin: 0; font-size: 14px; opacity: 0.9;">Confirmation de votre réponse</p>
             </div>
             <div style="padding: 30px 24px; color: #1a2621; line-height: 1.6;">
@@ -171,9 +170,9 @@ export default async function handler(
               
               <div style="background: #fbf9f4; border: 1px solid #e3d5be; border-radius: 8px; padding: 18px; margin: 24px 0;">
                 <h3 style="margin-top: 0; font-size: 16px; color: #8a5f28;">Rappel du rendez-vous</h3>
-                <p style="margin: 4px 0; font-size: 14px;"><strong>📅 Date :</strong> Samedi 9 janvier 2027</p>
-                <p style="margin: 4px 0; font-size: 14px;"><strong>⛪ Cérémonie (11h30) :</strong> ${weddingConfig.calendar.location}</p>
-                <p style="margin: 4px 0; font-size: 14px;"><strong>🥂 Réception (14h00) :</strong> Jubilee Hall, Mater Dei Cathedral, Umuahia, Nigéria</p>
+                <p style="margin: 4px 0; font-size: 14px;"><strong>📅 Date :</strong> Jeudi 17 & vendredi 18 décembre 2026</p>
+                <p style="margin: 4px 0; font-size: 14px;"><strong>⛪ Mariage religieux (vendredi 18, 14h00) :</strong> Paroisse du Grand Temple, Nkongsamba, Cameroun</p>
+                <p style="margin: 4px 0; font-size: 14px;"><strong>🥂 Réception :</strong> SAM’S HÔTEL, Nkongsamba, Cameroun</p>
                 ${hasPlusOne && guestName ? `<p style="margin: 4px 0; font-size: 14px;"><strong>👥 Accompagnant(e) :</strong> ${guestName}</p>` : ''}
               </div>
 
@@ -188,7 +187,7 @@ export default async function handler(
               </p>
             </div>
             <div style="background: #f7f2e9; padding: 14px; text-align: center; font-size: 12px; color: #777; border-top: 1px solid #ebdcc5;">
-              Delchere & Ihechukwu — 2027
+              Leonelle & Romuald — 2026
             </div>
           </div>
         `
@@ -196,7 +195,7 @@ export default async function handler(
         await transporter.sendMail({
           from: smtpFrom,
           to: email,
-          subject: `💍 Confirmation réservation mariage — Delchere & Ihechukwu`,
+          subject: `💍 Confirmation réservation mariage — Leonelle & Romuald`,
           html: guestHtml,
         })
       }

@@ -103,28 +103,9 @@ Et cette fois, nous allons l’écrire ensemble. ❤️`,
     dressColorGold: 'Lilas',
     dressColorSage: 'Violet',
     dressCodeSwatchesLabel: 'Couleurs du dress code',
-    dressText: `Notre palette de couleurs reflète la symbolique de notre histoire :
-
-Ivoire : Le début d'un nouveau chapitre — la page blanche sur laquelle notre histoire continue de s'écrire.
-
-Or Champagne : La valeur de tout ce que nous avons construit ensemble et la joie de célébrer cette étape importante : Découverte, Accomplissement et Célébration.
-
-Vert Sauge : La vie, la croissance et l'harmonie. Un symbole de notre parcours pour bâtir une vie ensemble et grandir côte à côte, avec la simplicité et la chaleur que nous souhaitons apporter à notre foyer.
-
-L'association de ces trois nuances crée un thème axé sur l'élégance, la nature, le savoir et l'amour intemporel.`,
     gifts: 'Cadeaux & contact',
     giftsTitle: 'Cadeaux',
-    giftsText: `Votre présence à nos côtés sera déjà un très beau cadeau. Pour celles et ceux qui souhaitent nous témoigner une attention supplémentaire, vous pouvez participer à l’urne via :
-
-• **TMoney** : **+228 92 06 94 98** (Titulaire : DON-TSA Delchere)
-• **En main propre** : le jour de la célébration, dans l’urne prévue à cet effet.
-
-Merci du fond du cœur pour votre générosité et votre bienveillance.`,
     contactTitle: 'Contact',
-    contactText: `Pour toute question concernant la cérémonie ou la réception, vous pouvez nous contacter aux numéros suivants :
-
-• **+228 92 06 94 98**
-• **+27 65 30 71 427**`,
     rsvp: 'RSVP',
     rsvpText: 'Cela nous ferait grand plaisir d’obtenir votre réponse au plus tard fin octobre, afin de nous aider à préparer au mieux cette célébration.',
     invitationEyebrow: "02 / L'Invitation",
@@ -140,7 +121,7 @@ Merci du fond du cœur pour votre générosité et votre bienveillance.`,
     emailLabel: "Adresse Email",
     emailPlaceholder: "Ex. marie.dupont@email.com",
     phoneLabel: "Téléphone / WhatsApp",
-    phonePlaceholder: "Ex. +228 92 00 00 00",
+    phonePlaceholder: "Ex. +237 6 99 00 00 00",
     attendanceQuestion: "Serez-vous présent(e) parmi nous ?",
     attendingOptionYes: "Oui, je serai présent(e)",
     attendingOptionNo: "Je ne pourrai pas venir",
@@ -161,7 +142,7 @@ Merci du fond du cœur pour votre générosité et votre bienveillance.`,
     wish5: "🤍 Un bonheur éclatant, une complicité éternelle et une douce sérénité.",
     wishCustom: "✍️ Vœu personnalisé (rédigez votre propre message)",
     wishCustomTitle: "Vœu personnalisé",
-    customWishPlaceholder: "Écrivez vos vœux ou votre mot personnalisé pour Delchere & Ihechukwu...",
+    customWishPlaceholder: "Écrivez vos vœux ou votre mot personnalisé pour Leonelle & Romuald...",
     customWishLimit: "Limité à 250 caractères",
     customWishCounter: "caractères",
     customWishRequired: "Veuillez saisir votre vœu personnalisé",
@@ -276,28 +257,9 @@ And this time, we get to write it together. ❤️`,
     dressColorGold: 'Lilac',
     dressColorSage: 'Violet',
     dressCodeSwatchesLabel: 'Dress code colours',
-    dressText: `Our colour palette reflects the symbolism of our story:
-
-Ivory: The beginning of a new chapter — the blank page on which our story continues to be written.
-
-Champagne Gold: The worth of everything we have built together, and the joy of celebrating this important milestone: Discovery, Achievement and Celebration.
-
-Sage Green: Life, growth and harmony. A symbol of our journey to build a life together and grow side by side, with the simplicity and warmth we wish to bring to our home.
-
-Together, these three shades create a theme rooted in elegance, nature, wisdom and timeless love.`,
     gifts: 'Gifts & contact',
     giftsTitle: 'Gifts',
-    giftsText: `Your presence by our side will already be a wonderful gift. For those who would like to show us some extra kindness, you can contribute to the gift fund via:
-
-- **TMoney**: **+228 92 06 94 98** (Account holder: DON-TSA Delchere)
-- **In person**: on the day of the celebration, in the box provided for this purpose.
-
-Thank you from the bottom of our hearts for your generosity and kindness.`,
     contactTitle: 'Contact',
-    contactText: `For any questions about the ceremony or reception, you can reach us at the following numbers:
-
-- **+228 92 06 94 98**
-- **+27 65 30 71 427**`,
     rsvp: 'RSVP',
     rsvpText: 'We would be delighted to receive your response by late October at the latest, to help us best prepare for this celebration.',
     invitationEyebrow: "02 / The Invitation",
@@ -313,7 +275,7 @@ Thank you from the bottom of our hearts for your generosity and kindness.`,
     emailLabel: "Email Address",
     emailPlaceholder: "e.g. john.doe@email.com",
     phoneLabel: "Phone / WhatsApp",
-    phonePlaceholder: "e.g. +228 92 00 00 00",
+    phonePlaceholder: "e.g. +237 6 99 00 00 00",
     attendanceQuestion: "Will you be attending?",
     attendingOptionYes: "Yes, I will attend with pleasure",
     attendingOptionNo: "No, I will not be able to attend",
@@ -334,7 +296,7 @@ Thank you from the bottom of our hearts for your generosity and kindness.`,
     wish5: "🤍 Radiant happiness, everlasting companionship, and sweet serenity.",
     wishCustom: "✍️ Personalized wish (write your own message)",
     wishCustomTitle: "Personalized wish",
-    customWishPlaceholder: "Write your warm wishes or personal note for Delchere & Ihechukwu...",
+    customWishPlaceholder: "Write your warm wishes or personal note for Leonelle & Romuald...",
     customWishLimit: "Limited to 250 characters",
     customWishCounter: "characters",
     customWishRequired: "Please enter your custom wish",

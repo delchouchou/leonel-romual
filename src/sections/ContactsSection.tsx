@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 
 const contacts = [
-  { title: 'Contact 1', number: '+237 98703686', tel: '+23798703686' },
-  { title: 'Contact 2', number: '+237 6 93 73 17 62', tel: '+237693731762' },
-  { title: 'Contact 3', number: '+237 6 55 52 30 61', tel: '+237655523061' },
+  { title: 'Contact 1', number: '+237 6 98 93 18 72', tel: '+237698931872' },
+  { title: 'Contact 2', number: '+237 6 98 51 64 04', tel: '+237698516404' },
+  { title: 'Contact 3', number: '+237 6 98 23 88 33', tel: '+237698238833' },
 ]
 
 const ContactsSection: FC = () => (

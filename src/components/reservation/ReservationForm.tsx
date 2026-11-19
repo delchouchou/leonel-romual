@@ -126,7 +126,7 @@ const ReservationForm: FC = () => {
     const attendanceValue = GOOGLE_ATTENDANCE_MAP[attendance]
     const chosenWishText =
       selectedWishKey === 'custom'
-        ? (customWish.trim() || (locale === 'en' ? 'Best wishes to Delchere & Ihechukwu!' : 'Tous nos vœux de bonheur à Delchere & Ihechukwu !'))
+        ? (customWish.trim() || (locale === 'en' ? 'Best wishes to Leonelle & Romuald!' : 'Tous nos vœux de bonheur à Leonelle & Romuald !'))
         : (t(selectedWishKey) || '')
 
     const payload = {
@@ -365,7 +365,7 @@ const ReservationForm: FC = () => {
                 inputMode="tel"
                 autoComplete="tel"
                 className="reservation-input"
-                placeholder={t('phonePlaceholder') || 'Ex. +228 92 00 00 00 / +27 65 00 00 00'}
+                placeholder={t('phonePlaceholder') || 'Ex. +237 6 99 00 00 00'}
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
@@ -568,8 +568,8 @@ const ReservationForm: FC = () => {
                       placeholder={
                         t('customWishPlaceholder') ||
                         (locale === 'en'
-                          ? 'Write your warm wishes or personal note for Delchere & Ihechukwu...'
-                          : 'Écrivez vos vœux ou votre mot personnalisé pour Delchere & Ihechukwu...')
+                          ? 'Write your warm wishes or personal note for Leonelle & Romuald...'
+                          : 'Écrivez vos vœux ou votre mot personnalisé pour Leonelle & Romuald...')
                       }
                       value={customWish}
                       onChange={(e) => setCustomWish(e.target.value)}
